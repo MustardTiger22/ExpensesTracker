@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ExpensesTracker.DashBoardController">
+   <center>
+      <HBox prefHeight="198.0" prefWidth="704.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="300.0" prefWidth="400.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="60.0" prefWidth="400.0" text="Expenses">
+                     <font>
+                        <Font name="Lato Bold" size="25.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="46.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/icons8-wallet-64.png" />
+                           </image></ImageView>
+                     </graphic>
+                  </Label>
+                  <Label fx:id="check" alignment="CENTER" prefHeight="60.0" prefWidth="400.0" text="Bills            ">
+                     <font>
+                        <Font name="Lato Bold" size="25.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="46.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/icons8-bill-64.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="60.0" prefWidth="400.0" text="Income    ">
+                     <font>
+                        <Font name="Lato Bold" size="25.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="46.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/icons8-encashment-car-64.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="60.0" prefWidth="400.0" text="Budget    ">
+                     <font>
+                        <Font name="Lato Bold" size="25.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="46.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/icons8-budget-64.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="60.0" prefWidth="400.0" text="Accounts">
+                     <font>
+                        <Font name="Lato Bold" size="25.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="46.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/icons8-money-box-64.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="300.0" prefWidth="400.0">
+               <children>
+                  <Label fx:id="expensesValue" alignment="CENTER" prefHeight="60.0" prefWidth="400.0" text="800.0">
+                     <font>
+                        <Font name="Lato Bold" size="25.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="billsValue" alignment="CENTER" prefHeight="60.0" prefWidth="400.0" text="600.0">
+                     <font>
+                        <Font name="Lato Bold" size="25.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="incomeValue" alignment="CENTER" prefHeight="60.0" prefWidth="400.0" text="2000.0">
+                     <font>
+                        <Font name="Lato Bold" size="25.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="budgetValue" alignment="CENTER" prefHeight="60.0" prefWidth="400.0" text="1500.0">
+                     <font>
+                        <Font name="Lato Bold" size="25.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="accountsValue" alignment="CENTER" prefHeight="60.0" prefWidth="400.0" text="3500.0">
+                     <font>
+                        <Font name="Lato Bold" size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </center>
+   <top>
+      <VBox prefHeight="142.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+         <children>
+            <StackPane prefHeight="89.0" prefWidth="800.0">
+               <children>
+                  <Label text="Dashboard">
+                     <font>
+                        <Font name="Lato Black" size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="0.0" prefWidth="800.0">
+               <children>
+                  <Label fx:id="dateValue" text="dd/mm/yyyy">
+                     <font>
+                        <Font name="Lato-Light" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </StackPane>
+         </children>
+      </VBox>
+   </top>
+   <bottom>
+      <StackPane prefHeight="350.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+         <children>
+            <PieChart fx:id="recapPieChart" StackPane.alignment="CENTER" />
+         </children>
+      </StackPane>
+   </bottom>
+</BorderPane>
