@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="340.0" fx:controller="ExpensesTracker.Controllers.SettingsController" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <StackPane prefHeight="108.0" prefWidth="684.0">
          <children>
@@ -21,32 +20,32 @@
       </StackPane>
       <StackPane prefHeight="81.0" prefWidth="365.0">
          <children>
-            <TextField floatText="Username" maxWidth="-Infinity" prefHeight="81.0" prefWidth="308.0" />
+            <TextField fx:id="username" floatText="Username" maxWidth="-Infinity" prefHeight="81.0" prefWidth="308.0" />
          </children>
       </StackPane>
       <StackPane prefHeight="81.0" prefWidth="643.0">
          <children>
-            <TextField floatText="Expenses" maxWidth="-Infinity" prefHeight="81.0" prefWidth="308.0" />
+            <TextField fx:id="expenses" floatText="Expenses" maxWidth="-Infinity" prefHeight="81.0" prefWidth="308.0" />
          </children>
       </StackPane>
       <StackPane prefHeight="81.0" prefWidth="365.0">
          <children>
-            <TextField floatText="Bills" maxWidth="-Infinity" prefHeight="81.0" prefWidth="308.0" />
+            <TextField fx:id="bills" floatText="Bills" maxWidth="-Infinity" prefHeight="81.0" prefWidth="308.0" />
          </children>
       </StackPane>
       <StackPane prefHeight="81.0" prefWidth="365.0">
          <children>
-            <TextField floatText="Income" maxWidth="-Infinity" prefHeight="81.0" prefWidth="308.0" />
+            <TextField fx:id="income" floatText="Income" maxWidth="-Infinity" prefHeight="81.0" prefWidth="308.0" />
          </children>
       </StackPane>
       <StackPane prefHeight="81.0" prefWidth="365.0">
          <children>
-            <TextField floatText="Budget" maxWidth="-Infinity" prefHeight="81.0" prefWidth="308.0" />
+            <TextField fx:id="budget" floatText="Budget" maxWidth="-Infinity" prefHeight="81.0" prefWidth="308.0" />
          </children>
       </StackPane>
       <StackPane prefHeight="81.0" prefWidth="365.0">
          <children>
-            <TextField floatText="Accounts" maxWidth="-Infinity" prefHeight="81.0" prefWidth="308.0" />
+            <TextField fx:id="accounts" floatText="Accounts" maxWidth="-Infinity" prefHeight="81.0" prefWidth="308.0" />
          </children>
       </StackPane>
       <StackPane prefHeight="105.0" prefWidth="340.0">
