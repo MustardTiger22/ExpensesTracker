@@ -5,13 +5,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class Settings implements Serializable {
+    private String username;
     private String budget;
     private String expenses;
     private String bills;
     private String accounts;
     private String income;
 
-    public Settings(String budget, String expenses, String bills, String accounts, String income) {
+    public Settings(String username, String budget, String expenses, String bills, String accounts, String income) {
+        this.username = username;
         this.budget = budget;
         this.expenses = expenses;
         this.bills = bills;
@@ -19,6 +21,9 @@ public class Settings implements Serializable {
         this.income = income;
     }
 
+    public String getUsername() {
+        return username;
+    }
     public String getBudget() {
         return budget;
     }
@@ -37,6 +42,22 @@ public class Settings implements Serializable {
 
 
     public Settings() {
+//        try {
+//            FileInputStream fs = new FileInputStream("usersettings.ser");
+//            ObjectInputStream is = new ObjectInputStream(fs);
+//            Settings oneRestore = (Settings) is.readObject();
+//            this.username = oneRestore.getUsername();
+//            this.budget = oneRestore.getBudget();
+//            this.expenses = oneRestore.getExpenses();
+//            this.bills = oneRestore.getBills();
+//            this.accounts = oneRestore.getAccounts();
+//            this.income = oneRestore.getIncome();
+//            is.close();
+//
+//        }
+//        catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
     }
 
@@ -46,31 +67,35 @@ public class Settings implements Serializable {
             ObjectOutputStream os = new ObjectOutputStream(fs);
             os.writeObject(this);
             os.close();
+            System.out.println("Settings saved.");
         }
         catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public Settings LoadSettings() {
+    public void LoadSettings() {
 
         try {
             FileInputStream fs = new FileInputStream("Configuration/usersettings.ser");
             ObjectInputStream is = new ObjectInputStream(fs);
             Settings oneRestore = (Settings) is.readObject();
+            this.username = oneRestore.getUsername();
+            this.budget = oneRestore.getBudget();
+            this.expenses = oneRestore.getExpenses();
+            this.bills = oneRestore.getBills();
+            this.accounts = oneRestore.getAccounts();
+            this.income = oneRestore.getIncome();
             is.close();
-            return this;
         }
         catch (Exception e) {
             e.printStackTrace();
-            return null;
         }
     }
 
     public static Boolean IfTheFileExists(){
-
         try {
-            final Path path = Files.createTempFile("testFile", ".txt");
+            final Path path = Files.createTempFile("Configuration/usersettings", ".ser");
             if(Files.exists(path))
                 return true;
             else

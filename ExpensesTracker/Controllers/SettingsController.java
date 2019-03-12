@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
 
 public class SettingsController implements Initializable {
     private Settings model;
-
+    @FXML private TextField username;
     @FXML private TextField budget;
     @FXML private TextField expenses;
     @FXML private TextField bills;
@@ -22,22 +22,32 @@ public class SettingsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+//        try {
+//            if(model.IfTheFileExists()) {
         try {
-            if(model.IfTheFileExists()) {
-                budget = new TextField(model.getBudget());
-                expenses = new TextField(model.getExpenses());
-                bills = new TextField(model.getBills());
-                accounts = new TextField(model.getAccounts());
-                income = new TextField(model.getIncome());
-            }
+            model = new Settings();
+            model.LoadSettings();
+            username.setText(model.getUsername());
+            budget.setText(model.getBudget());
+            expenses.setText(model.getExpenses());
+            bills.setText(model.getBills());
+            accounts.setText(model.getAccounts());
+            income.setText(model.getIncome());
         }
-        catch (NullPointerException e)
-        {
+        catch (NullPointerException e) {
             e.printStackTrace();
         }
 
+
+//            }
+//        }
+//        catch (NullPointerException e)
+//        {
+//            e.printStackTrace();
+//        }
+
         saveBtn.setOnAction(e -> {
-            model = new Settings(budget.toString(), expenses.toString(), bills.toString(), accounts.toString(), income.toString());
+            model = new Settings(username.getText(), budget.getText(), expenses.getText(), bills.getText(), accounts.getText(), income.getText());
             model.SaveSettings();
         });
     }
