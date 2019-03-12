@@ -1,4 +1,4 @@
-package ExpensesTracker;
+package ExpensesTracker.Controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -7,10 +7,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import java.net.URL;
-import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
-import ExpensesTracker.Model.Dashboard;
+import ExpensesTracker.Models.Dashboard;
 
 
 public class DashBoardController implements Initializable {

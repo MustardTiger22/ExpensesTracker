@@ -1,8 +1,6 @@
-package ExpensesTracker.Model;
+package ExpensesTracker.Models;
 
-import java.sql.Time;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class Dashboard {
     @Deprecated private LocalDateTime datetime;
