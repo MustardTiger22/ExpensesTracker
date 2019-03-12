@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <StackPane prefHeight="108.0" prefWidth="684.0">
+         <children>
+            <Label contentDisplay="CENTER" prefHeight="100.0" prefWidth="150.0" text="Settings">
+               <font>
+                  <Font name="Lato Black" size="35.0" />
+               </font>
+            </Label>
+         </children>
+      </StackPane>
+      <StackPane prefHeight="81.0" prefWidth="365.0">
+         <children>
+            <TextField floatText="Username" maxWidth="-Infinity" prefHeight="81.0" prefWidth="308.0" />
+         </children>
+      </StackPane>
+      <StackPane prefHeight="81.0" prefWidth="643.0">
+         <children>
+            <TextField floatText="Expenses" maxWidth="-Infinity" prefHeight="81.0" prefWidth="308.0" />
+         </children>
+      </StackPane>
+      <StackPane prefHeight="81.0" prefWidth="365.0">
+         <children>
+            <TextField floatText="Bills" maxWidth="-Infinity" prefHeight="81.0" prefWidth="308.0" />
+         </children>
+      </StackPane>
+      <StackPane prefHeight="81.0" prefWidth="365.0">
+         <children>
+            <TextField floatText="Income" maxWidth="-Infinity" prefHeight="81.0" prefWidth="308.0" />
+         </children>
+      </StackPane>
+      <StackPane prefHeight="81.0" prefWidth="365.0">
+         <children>
+            <TextField floatText="Budget" maxWidth="-Infinity" prefHeight="81.0" prefWidth="308.0" />
+         </children>
+      </StackPane>
+      <StackPane prefHeight="81.0" prefWidth="365.0">
+         <children>
+            <TextField floatText="Accounts" maxWidth="-Infinity" prefHeight="81.0" prefWidth="308.0" />
+         </children>
+      </StackPane>
+      <StackPane prefHeight="105.0" prefWidth="340.0">
+         <children>
+            <Button mnemonicParsing="false" text="Save" />
+         </children>
+      </StackPane>
+   </children>
+</VBox>
