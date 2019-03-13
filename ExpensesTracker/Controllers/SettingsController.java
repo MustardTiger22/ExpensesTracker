@@ -22,9 +22,7 @@ public class SettingsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        try {
-//            if(model.IfTheFileExists()) {
-        try {
+        if(model.IfTheFileExists()) {
             model = new Settings();
             model.LoadSettings();
             username.setText(model.getUsername());
@@ -34,17 +32,7 @@ public class SettingsController implements Initializable {
             accounts.setText(model.getAccounts());
             income.setText(model.getIncome());
         }
-        catch (NullPointerException e) {
-            e.printStackTrace();
-        }
 
-
-//            }
-//        }
-//        catch (NullPointerException e)
-//        {
-//            e.printStackTrace();
-//        }
 
         saveBtn.setOnAction(e -> {
             model = new Settings(username.getText(), budget.getText(), expenses.getText(), bills.getText(), accounts.getText(), income.getText());

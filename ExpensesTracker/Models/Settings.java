@@ -58,7 +58,6 @@ public class Settings implements Serializable {
 //        catch (Exception e) {
 //            e.printStackTrace();
 //        }
-
     }
 
     public void SaveSettings() {
@@ -94,16 +93,11 @@ public class Settings implements Serializable {
     }
 
     public static Boolean IfTheFileExists(){
-        try {
-            final Path path = Files.createTempFile("Configuration/usersettings", ".ser");
-            if(Files.exists(path))
-                return true;
-            else
-                return false;
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+        String filePathString = "Configuration/usersettings.ser";
+        File f = new File(filePathString);
+        if(f.exists() && !f.isDirectory())
+            return true;
+
+        return false;
     }
 }
