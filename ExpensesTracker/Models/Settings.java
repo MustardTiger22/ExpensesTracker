@@ -1,5 +1,8 @@
 package ExpensesTracker.Models;
 
+import com.gluonhq.charm.glisten.control.TextField;
+import javafx.scene.control.Label;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,6 +22,25 @@ public class Settings implements Serializable {
         this.bills = bills;
         this.accounts = accounts;
         this.income = income;
+    }
+
+    public Settings() {
+//        try {
+//            FileInputStream fs = new FileInputStream("usersettings.ser");
+//            ObjectInputStream is = new ObjectInputStream(fs);
+//            Settings oneRestore = (Settings) is.readObject();
+//            this.username = oneRestore.getUsername();
+//            this.budget = oneRestore.getBudget();
+//            this.expenses = oneRestore.getExpenses();
+//            this.bills = oneRestore.getBills();
+//            this.accounts = oneRestore.getAccounts();
+//            this.income = oneRestore.getIncome();
+//            is.close();
+//
+//        }
+//        catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     public String getUsername() {
@@ -41,25 +63,6 @@ public class Settings implements Serializable {
     }
 
 
-    public Settings() {
-//        try {
-//            FileInputStream fs = new FileInputStream("usersettings.ser");
-//            ObjectInputStream is = new ObjectInputStream(fs);
-//            Settings oneRestore = (Settings) is.readObject();
-//            this.username = oneRestore.getUsername();
-//            this.budget = oneRestore.getBudget();
-//            this.expenses = oneRestore.getExpenses();
-//            this.bills = oneRestore.getBills();
-//            this.accounts = oneRestore.getAccounts();
-//            this.income = oneRestore.getIncome();
-//            is.close();
-//
-//        }
-//        catch (Exception e) {
-//            e.printStackTrace();
-//        }
-    }
-
     public void SaveSettings() {
         try {
             FileOutputStream fs = new FileOutputStream("Configuration/usersettings.ser");
@@ -74,7 +77,6 @@ public class Settings implements Serializable {
     }
 
     public void LoadSettings() {
-
         try {
             FileInputStream fs = new FileInputStream("Configuration/usersettings.ser");
             ObjectInputStream is = new ObjectInputStream(fs);
@@ -85,6 +87,42 @@ public class Settings implements Serializable {
             this.bills = oneRestore.getBills();
             this.accounts = oneRestore.getAccounts();
             this.income = oneRestore.getIncome();
+            is.close();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void LoadSettings(TextField username, TextField budget, TextField expenses, TextField bills, TextField accounts, TextField income) {
+        try {
+            FileInputStream fs = new FileInputStream("Configuration/usersettings.ser");
+            ObjectInputStream is = new ObjectInputStream(fs);
+            Settings oneRestore = (Settings) is.readObject();
+                username.setText(oneRestore.getUsername());
+                budget.setText(oneRestore.getBudget());
+                expenses.setText(oneRestore.getExpenses());
+                bills.setText(oneRestore.getBills());
+                accounts.setText(oneRestore.getAccounts());
+                income.setText(oneRestore.getIncome());
+            is.close();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void LoadSettings(Label username, Label budget, Label expenses, Label bills, Label accounts, Label income) {
+        try {
+            FileInputStream fs = new FileInputStream("Configuration/usersettings.ser");
+            ObjectInputStream is = new ObjectInputStream(fs);
+            Settings oneRestore = (Settings) is.readObject();
+            username.setText(oneRestore.getUsername());
+            budget.setText(oneRestore.getBudget());
+            expenses.setText(oneRestore.getExpenses());
+            bills.setText(oneRestore.getBills());
+            accounts.setText(oneRestore.getAccounts());
+            income.setText(oneRestore.getIncome());
             is.close();
         }
         catch (Exception e) {

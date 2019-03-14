@@ -50,7 +50,7 @@
       </StackPane>
       <StackPane prefHeight="105.0" prefWidth="340.0">
          <children>
-            <Button fx:id="saveBtn" mnemonicParsing="false" text="Save" />
+            <Button fx:id="saveBtn"  mnemonicParsing="false" text="Save" />
          </children>
       </StackPane>
    </children>
