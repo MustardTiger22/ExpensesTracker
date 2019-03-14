@@ -30,8 +30,8 @@ public class DashboardController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         userSettings = new Settings();
         userSettings.LoadSettings(username, budget, expenses, bills, accounts, income);
-    
 
+        dateValue.setText(model.getFormattedDate());
 
 
         ObservableList<PieChart.Data> pieChartData =
