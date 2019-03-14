@@ -1,6 +1,7 @@
 package ExpensesTracker.Controllers;
 
 import ExpensesTracker.Models.Settings;
+import ExpensesTracker.Models.Dashboard;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,7 +10,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
-import ExpensesTracker.Models.Dashboard;
+
 
 
 public class DashboardController implements Initializable {
