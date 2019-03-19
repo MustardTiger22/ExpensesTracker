@@ -65,6 +65,7 @@ public class Settings implements Serializable {
 
     public void SaveSettings() {
         try {
+            new File("./Configuration").mkdirs();
             FileOutputStream fs = new FileOutputStream("Configuration/usersettings.ser");
             ObjectOutputStream os = new ObjectOutputStream(fs);
             os.writeObject(this);
@@ -131,6 +132,7 @@ public class Settings implements Serializable {
     }
 
     public static Boolean IfTheFileExists(){
+        new File("./Configuration").mkdirs();
         String filePathString = "Configuration/usersettings.ser";
         File f = new File(filePathString);
         if(f.exists() && !f.isDirectory())
