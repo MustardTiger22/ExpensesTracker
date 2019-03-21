@@ -1,14 +1,14 @@
 package ExpensesTracker.Models;
 
-import java.time.format.DateTimeFormatter;
+import javafx.scene.control.DatePicker;
 
 public class Expenses {
-    private DateTimeFormatter date;
+    private DatePicker date;
     private String description;
     private String category;
     private String amount;
 
-    public DateTimeFormatter getDate() {
+    public DatePicker getDate() {
         return date;
 
     }
@@ -22,7 +22,7 @@ public class Expenses {
         return amount;
     }
 
-    Expenses(DateTimeFormatter date, String description, String category, String amount) {
+    Expenses(DatePicker date, String description, String category, String amount) {
         this.amount = amount;
         this.description = description;
         this.category = category;

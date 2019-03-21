@@ -63,20 +63,8 @@ public class DashboardController implements Initializable {
             }
         });
         addExpenseBtn.setOnAction(e -> {
-            try {
-                //Switch scenes
-                Stage window = new Stage();
-                Parent root = FXMLLoader.load(getClass().getResource("../Views/AddExpenseUI.fxml"));
-                window.setTitle("Expenses Tracker - board");
-                window.setScene(new Scene(root));
-                window.show();
-                Node source = (Node) e.getSource();
-                Stage stage = (Stage) source.getScene().getWindow();
-                stage.close();
-            }
-            catch (IOException ex) {
-                ex.printStackTrace();
-            }
+            AddexpenseController addex = new AddexpenseController();
+            addex.showStage();
         });
 
 
