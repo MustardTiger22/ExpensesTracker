@@ -33,14 +33,10 @@ public class AddexpenseController implements Initializable {
             Stage window = new Stage();
             window.initModality(Modality.APPLICATION_MODAL);
             Parent root = FXMLLoader.load(getClass().getResource("../Views/AddexpenseUI.fxml"));
-            saveBtn.setOnAction(e -> {
-                window.close();
             window.setTitle("Expenses Tracker - board");
             window.setScene(new Scene(root));
 
             window.showAndWait();
-
-            });
 
 
         } catch (IOException ex) {
