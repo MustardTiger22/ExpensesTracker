@@ -1,5 +1,6 @@
 package ExpensesTracker;
 
+import ExpensesTracker.Controllers.DashboardController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,10 +10,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("Views/DashboardUI.fxml"));
-        primaryStage.setTitle("Dashboard");
-        primaryStage.setScene(new Scene(root));
-        primaryStage.show();
+        DashboardController dashboardController = new DashboardController();
+        dashboardController.showStage();
     }
 
 

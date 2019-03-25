@@ -2,14 +2,16 @@ package ExpensesTracker.Models;
 
 import javafx.scene.control.DatePicker;
 
+
 public class Expenses {
-    private DatePicker date;
+    private String date;
     private String description;
     private String category;
     private String amount;
-    private static int amountOfExpenses = 0;
 
-    public DatePicker getDate() {
+//    private static int amountOfExpenses = 0;
+
+    public String getDate() {
         return date;
     }
     public String getDescription() {
@@ -21,16 +23,19 @@ public class Expenses {
     public String getAmount() {
         return amount;
     }
-    public static int getAmountOfExpenses() {
-        return amountOfExpenses;
-    }
+//    public static int getAmountOfExpenses() {
+//        return amountOfExpenses;
+//    }
 
-    Expenses(DatePicker date, String description, String category, String amount) {
+    public Expenses(String date, String description, String category, String amount) {
         this.amount = amount;
         this.description = description;
         this.category = category;
         this.date = date;
-        amountOfExpenses++;
+//        amountOfExpenses++;
+    }
+    public Expenses() {
+
     }
 
 }

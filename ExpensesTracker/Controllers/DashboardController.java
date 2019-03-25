@@ -1,20 +1,17 @@
 package ExpensesTracker.Controllers;
 
-import ExpensesTracker.Models.Settings;
 import ExpensesTracker.Models.Dashboard;
+import ExpensesTracker.Models.Settings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,7 +21,7 @@ import java.util.ResourceBundle;
 public class DashboardController implements Initializable {
     private Dashboard model = new Dashboard();
     private Settings userSettings;
-
+    private final Stage thisStage;
     @FXML private Button showExpensesBoardBtn;
     @FXML private Button addExpenseBtn;
     @FXML private PieChart recapPieChart;
@@ -37,6 +34,23 @@ public class DashboardController implements Initializable {
     @FXML private Label accounts;
 
 
+    public DashboardController() {
+        thisStage = new Stage();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/DashboardUI.fxml"));
+            loader.setController(this);
+            thisStage.setScene(new Scene(loader.load()));
+            thisStage.setTitle("Dashboard");
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showStage() throws Exception{
+        thisStage.showAndWait();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if(userSettings.IfTheFileExists()) {
@@ -44,29 +58,13 @@ public class DashboardController implements Initializable {
             userSettings.LoadSettings(username, budget, expenses, bills, accounts, income);
         }
         dateValue.setText(model.getFormattedDate());
-
-        //Buttons
         showExpensesBoardBtn.setOnAction(e -> {
-            try {
-                //Switch scenes
-                Stage window = new Stage();
-                Parent root = FXMLLoader.load(getClass().getResource("../Views/ExpensesboardUI.fxml"));
-                window.setTitle("Expenses Tracker - board");
-                window.setScene(new Scene(root));
-                window.show();
-                Node source = (Node) e.getSource();
-                Stage stage = (Stage) source.getScene().getWindow();
-                stage.close();
-            }
-            catch (IOException ex) {
-                ex.printStackTrace();
-            }
+            System.out.println(model.getExpenses(0).getDescription());
         });
         addExpenseBtn.setOnAction(e -> {
-            AddexpenseController addex = new AddexpenseController();
-            addex.showStage();
+            AddexpenseController exController = new AddexpenseController(model);
+            exController.showStage();
         });
-
 
         //Pie chart
         ObservableList<PieChart.Data> pieChartData =
