@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 
 
 public class DashboardController implements Initializable {
-    private Dashboard model = new Dashboard();
+    private Dashboard dashboard = new Dashboard();
     private Settings userSettings;
     private final Stage thisStage;
     @FXML private Button showExpensesBoardBtn;
@@ -57,13 +57,15 @@ public class DashboardController implements Initializable {
             userSettings = new Settings();
             userSettings.LoadSettings(username, budget, expenses, bills, accounts, income);
         }
-        dateValue.setText(model.getFormattedDate());
+        dateValue.setText(dashboard.getFormattedDate());
+
         showExpensesBoardBtn.setOnAction(e -> {
-            System.out.println(model.getExpenses(0).getDescription());
+            ExpensesBoardController expensesBoardController = new ExpensesBoardController(dashboard);
+            expensesBoardController.showStage();
         });
         addExpenseBtn.setOnAction(e -> {
-            AddexpenseController exController = new AddexpenseController(model);
-            exController.showStage();
+            AddexpenseController addexpenseController = new AddexpenseController(dashboard);
+            addexpenseController.showStage();
         });
 
         //Pie chart

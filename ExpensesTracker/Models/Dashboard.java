@@ -2,10 +2,7 @@ package ExpensesTracker.Models;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.DatePicker;
-
 import java.util.Calendar;
-import java.util.List;
 import java.util.Locale;
 
 public class Dashboard {
@@ -19,14 +16,6 @@ public class Dashboard {
     public String getFormattedDate() {
         return formattedDateString;
     }
-
-//    public void addToList(Expenses e) {
-//        if(e == null) {
-//            throw new NullPointerException();
-//        }
-//        else
-//        expensesList.add(e);
-//    }
 
     public void addToList(String datePicker, String description, String category, String amount) {
         try {
@@ -45,5 +34,7 @@ public class Dashboard {
         expensesList.remove(index);
     }
 
-
+    public ObservableList<Expenses> getExpensesList() {
+        return expensesList;
+    }
 }

@@ -9,14 +9,14 @@
 <?import javafx.scene.text.Font?>
 
 
-<SplitPane dividerPositions="0.7048951048951049" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="434.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<SplitPane dividerPositions="0.7048951048951049" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="434.0" prefWidth="700.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
    <items>
-      <TableView fx:id="expensesTable" prefHeight="432.0" prefWidth="509.0">
+      <TableView fx:id="expensesTableView" prefHeight="432.0" prefWidth="509.0">
         <columns>
-          <TableColumn fx:id="date" prefWidth="125.0" text="Date" />
-          <TableColumn fx:id="description" prefWidth="125.0" text="Description" />
-            <TableColumn fx:id="category" prefWidth="125.0" text="Category" />
-            <TableColumn fx:id="amount" prefWidth="125.0" text="Amount" />
+          <TableColumn fx:id="dateColumn" prefWidth="125.0" text="Date" />
+          <TableColumn fx:id="descriptionColumn" prefWidth="125.0" text="Description" />
+            <TableColumn fx:id="categoryColumn" prefWidth="125.0" text="Category" />
+            <TableColumn fx:id="amountColumn" prefWidth="125.0" text="Amount" />
         </columns>
       </TableView>
       <AnchorPane prefHeight="432.0" prefWidth="173.0">
