@@ -8,9 +8,6 @@ public class Expenses {
     private String description;
     private String category;
     private String amount;
-    private int id = 0;
-
-//    private static int amountOfExpenses = 0;
 
     public String getDate() {
         return date;
@@ -30,7 +27,6 @@ public class Expenses {
         this.description = description;
         this.category = category;
         this.date = date;
-        this.id = this.id + 1;
     }
     public Expenses() {
 

@@ -36,6 +36,7 @@ public class AddexpenseController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/AddexpenseUI.fxml"));
             loader.setController(this);
             thisStage.setScene(new Scene(loader.load()));
+            thisStage.resizableProperty().setValue(false);
             thisStage.setTitle("Add expense");
         }
         catch (IOException e) {
@@ -49,7 +50,10 @@ public class AddexpenseController implements Initializable {
 
     private void addToList() {
         try {
+
+
             dashboard.addToList(gettedDatePickerDate.toString(), description.getText(), category.getText(), amount.getText());
+//            System.out.println(dashboard.getExpenses().getId());
         }
         catch (NullPointerException e) {
             e.printStackTrace();

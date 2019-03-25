@@ -24,6 +24,7 @@ public class DashboardController implements Initializable {
     private final Stage thisStage;
     @FXML private Button showExpensesBoardBtn;
     @FXML private Button addExpenseBtn;
+    @FXML private Button settingsBtn;
     @FXML private PieChart recapPieChart;
     @FXML private Label dateValue;
     @FXML private Label username;
@@ -40,6 +41,7 @@ public class DashboardController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/DashboardUI.fxml"));
             loader.setController(this);
             thisStage.setScene(new Scene(loader.load()));
+            thisStage.resizableProperty().setValue(false);
             thisStage.setTitle("Dashboard");
         }
         catch (IOException e) {
@@ -47,15 +49,17 @@ public class DashboardController implements Initializable {
         }
     }
 
-    public void showStage() throws Exception{
+    public void showStage(){
         thisStage.showAndWait();
     }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if(userSettings.IfTheFileExists()) {
             userSettings = new Settings();
-            userSettings.LoadSettings(username, budget, expenses, bills, accounts, income);
+            userSettings.LoadSettings(username, budget, expenses, bills, income);
+            //setRecapPieChart();
         }
         dateValue.setText(dashboard.getFormattedDate());
 
@@ -67,6 +71,11 @@ public class DashboardController implements Initializable {
             AddexpenseController addexpenseController = new AddexpenseController(dashboard);
             addexpenseController.showStage();
         });
+        settingsBtn.setOnAction(e -> {thisStage.close();
+            SettingsController settingsController = new SettingsController(dashboard);
+            settingsController.showStage();
+
+        });
 
         //Pie chart
         ObservableList<PieChart.Data> pieChartData =
@@ -74,10 +83,7 @@ public class DashboardController implements Initializable {
                         new PieChart.Data("Expenses", Double.parseDouble(expenses.getText())),
                         new PieChart.Data("Income", Double.parseDouble(income.getText())),
                         new PieChart.Data("Budget", Double.parseDouble(budget.getText())),
-                        new PieChart.Data("Accounts", Double.parseDouble(accounts.getText())),
                         new PieChart.Data("Bills", Double.parseDouble(bills.getText())));
         recapPieChart.setData(pieChartData);
-
-
     }
 }

@@ -12,35 +12,18 @@ public class Settings implements Serializable {
     private String budget;
     private String expenses;
     private String bills;
-    private String accounts;
     private String income;
 
-    public Settings(String username, String budget, String expenses, String bills, String accounts, String income) {
+    public Settings(String username, String budget, String expenses, String bills, String income) {
         this.username = username;
         this.budget = budget;
         this.expenses = expenses;
         this.bills = bills;
-        this.accounts = accounts;
         this.income = income;
     }
 
     public Settings() {
-//        try {
-//            FileInputStream fs = new FileInputStream("usersettings.ser");
-//            ObjectInputStream is = new ObjectInputStream(fs);
-//            Settings oneRestore = (Settings) is.readObject();
-//            this.username = oneRestore.getUsername();
-//            this.budget = oneRestore.getBudget();
-//            this.expenses = oneRestore.getExpenses();
-//            this.bills = oneRestore.getBills();
-//            this.accounts = oneRestore.getAccounts();
-//            this.income = oneRestore.getIncome();
-//            is.close();
 //
-//        }
-//        catch (Exception e) {
-//            e.printStackTrace();
-//        }
     }
 
     public String getUsername() {
@@ -54,9 +37,6 @@ public class Settings implements Serializable {
     }
     public String getBills() {
         return bills;
-    }
-    public String getAccounts() {
-        return accounts;
     }
     public String getIncome() {
         return income;
@@ -86,7 +66,6 @@ public class Settings implements Serializable {
             this.budget = oneRestore.getBudget();
             this.expenses = oneRestore.getExpenses();
             this.bills = oneRestore.getBills();
-            this.accounts = oneRestore.getAccounts();
             this.income = oneRestore.getIncome();
             is.close();
         }
@@ -95,7 +74,7 @@ public class Settings implements Serializable {
         }
     }
 
-    public void LoadSettings(TextField username, TextField budget, TextField expenses, TextField bills, TextField accounts, TextField income) {
+    public void LoadSettings(TextField username, TextField budget, TextField expenses, TextField bills,  TextField income) {
         try {
             FileInputStream fs = new FileInputStream("Configuration/usersettings.ser");
             ObjectInputStream is = new ObjectInputStream(fs);
@@ -104,7 +83,6 @@ public class Settings implements Serializable {
                 budget.setText(oneRestore.getBudget());
                 expenses.setText(oneRestore.getExpenses());
                 bills.setText(oneRestore.getBills());
-                accounts.setText(oneRestore.getAccounts());
                 income.setText(oneRestore.getIncome());
             is.close();
         }
@@ -113,7 +91,7 @@ public class Settings implements Serializable {
         }
     }
 
-    public void LoadSettings(Label username, Label budget, Label expenses, Label bills, Label accounts, Label income) {
+    public void LoadSettings(Label username, Label budget, Label expenses, Label bills,  Label income) {
         try {
             FileInputStream fs = new FileInputStream("Configuration/usersettings.ser");
             ObjectInputStream is = new ObjectInputStream(fs);
@@ -122,7 +100,6 @@ public class Settings implements Serializable {
             budget.setText(oneRestore.getBudget());
             expenses.setText(oneRestore.getExpenses());
             bills.setText(oneRestore.getBills());
-            accounts.setText(oneRestore.getAccounts());
             income.setText(oneRestore.getIncome());
             is.close();
         }
