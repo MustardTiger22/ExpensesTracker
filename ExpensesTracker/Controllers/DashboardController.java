@@ -71,7 +71,8 @@ public class DashboardController implements Initializable {
             AddexpenseController addexpenseController = new AddexpenseController(dashboard);
             addexpenseController.showStage();
         });
-        settingsBtn.setOnAction(e -> {thisStage.close();
+        settingsBtn.setOnAction(e -> {
+            thisStage.close();
             SettingsController settingsController = new SettingsController(dashboard);
             settingsController.showStage();
 

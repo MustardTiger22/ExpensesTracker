@@ -2,14 +2,13 @@ package ExpensesTracker.Controllers;
 
 import ExpensesTracker.Models.Dashboard;
 import ExpensesTracker.Models.Expenses;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,7 +19,6 @@ import java.util.ResourceBundle;
 public class AddexpenseController implements Initializable {
     private final Stage thisStage;
     private Dashboard dashboard;
-    private Date gettedDatePickerDate;
     //FXML
     @FXML private Button saveBtn;
     @FXML private Button cancelBtn;
@@ -50,9 +48,7 @@ public class AddexpenseController implements Initializable {
 
     private void addToList() {
         try {
-
-
-            dashboard.getExpensesList().addToList(date, description.getText(), category.getText(), amount.getText());
+            dashboard.getExpensesList().addToList(date.getValue().toString(), description.getText(), category.getText(), amount.getText());
 //            System.out.println(dashboard.getExpenses().getId());
         }
         catch (NullPointerException e) {
@@ -63,9 +59,17 @@ public class AddexpenseController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //Sets that the amount property merely accepts numbers
+        amount.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d{0,10}([\\.]\\d{0,4})?")) {
+                    amount.setText(oldValue);
+                }
+            }
+        });
 
         saveBtn.setOnAction(e -> {
-            gettedDatePickerDate = Date.valueOf(date.getValue());
             addToList();
             thisStage.close();
         });

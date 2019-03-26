@@ -1,11 +1,9 @@
 package ExpensesTracker.Models;
 
-import com.gluonhq.charm.glisten.control.TextField;
 import javafx.scene.control.Label;
-
+import javafx.scene.control.TextField;
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
+
 
 public class Settings implements Serializable {
     private String username;
@@ -74,7 +72,7 @@ public class Settings implements Serializable {
         }
     }
 
-    public void LoadSettings(TextField username, TextField budget, TextField expenses, TextField bills,  TextField income) {
+    public void LoadSettings(TextField username, TextField budget, TextField expenses, TextField bills, TextField income) {
         try {
             FileInputStream fs = new FileInputStream("Configuration/usersettings.ser");
             ObjectInputStream is = new ObjectInputStream(fs);

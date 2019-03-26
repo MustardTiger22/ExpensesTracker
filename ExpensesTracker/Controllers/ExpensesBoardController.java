@@ -18,10 +18,10 @@ public class ExpensesBoardController implements Initializable {
     private final Stage thisStage;
     private Dashboard dashboard;
     @FXML private TableView<Expenses> expensesTableView;
-    @FXML private TableColumn<Expenses, DatePicker> dateColumn;
+    @FXML private TableColumn<Expenses, String> dateColumn;
     @FXML private TableColumn<Expenses, String> descriptionColumn;
     @FXML private TableColumn<Expenses, String> categoryColumn;
-    @FXML private TableColumn<Expenses, String> amountColumn;
+    @FXML private TableColumn<Expenses, Double> amountColumn;
     @FXML private Button editBtn;
     @FXML private Button deleteBtn;
 
@@ -45,10 +45,10 @@ public class ExpensesBoardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        dateColumn.setCellValueFactory(new PropertyValueFactory<Expenses, DatePicker>("date"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<Expenses, String>("date"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<Expenses, String>("description"));
         categoryColumn.setCellValueFactory(new PropertyValueFactory<Expenses, String>("category"));
-        amountColumn.setCellValueFactory(new PropertyValueFactory<Expenses, String>("amount"));
+        amountColumn.setCellValueFactory(new PropertyValueFactory<Expenses, Double>("amount"));
 
         //Table properties
         expensesTableView.setItems(dashboard.getExpensesList().getList());
@@ -59,11 +59,13 @@ public class ExpensesBoardController implements Initializable {
         //Buttons
         editBtn.setOnAction(e -> {
             dashboard.getExpensesList().saveExpensesToFile();
+            System.out.println("Saved to file.");
         });
 
         deleteBtn.setOnAction(e -> {
             ObservableList<Expenses> allExpenses = expensesTableView.getItems();
             Expenses selectedRow = expensesTableView.getSelectionModel().getSelectedItem();
+            System.out.println(selectedRow.getDescription());
             dashboard.getExpensesList().getList().remove(selectedRow);
             allExpenses.remove(selectedRow);
 

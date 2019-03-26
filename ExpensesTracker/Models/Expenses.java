@@ -6,12 +6,12 @@ import java.io.Serializable;
 
 
 public class Expenses implements Serializable {
-    private DatePicker date;
+    private String date;
     private String description;
     private String category;
     private String amount;
 
-    public DatePicker getDate() {
+    public String getDate() {
         return date;
     }
     public String getDescription() {
@@ -24,7 +24,7 @@ public class Expenses implements Serializable {
         return amount;
     }
 
-    public Expenses(DatePicker date, String description, String category, String amount) {
+    public Expenses(String date, String description, String category, String amount) {
         this.amount = amount;
         this.description = description;
         this.category = category;

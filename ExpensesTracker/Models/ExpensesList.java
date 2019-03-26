@@ -22,7 +22,7 @@ public class ExpensesList implements Serializable {
         }
     }
 
-    public void addToList(DatePicker datePicker, String description, String category, String amount) {
+    public void addToList(String datePicker, String description, String category, String amount) {
         try {
             expensesList.add(new Expenses(datePicker, description, category , amount));
         }

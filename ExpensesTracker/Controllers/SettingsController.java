@@ -2,12 +2,14 @@ package ExpensesTracker.Controllers;
 
 import ExpensesTracker.Models.Dashboard;
 import ExpensesTracker.Models.Settings;
-import com.gluonhq.charm.glisten.control.TextField;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
@@ -23,6 +25,7 @@ public class SettingsController implements Initializable {
     @FXML private TextField bills;
     @FXML private TextField income;
     @FXML private Button saveBtn;
+    @FXML private Button closeBtn;
 
     public SettingsController(Dashboard dashboard) {
         this.dashboard = dashboard;
@@ -49,6 +52,39 @@ public class SettingsController implements Initializable {
             settings = new Settings();
             settings.LoadSettings(username, budget, expenses, bills, income);
         }
+        //Sets the field to numeric fields
+        budget.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d{0,10}([\\.]\\d{0,4})?")) {
+                    budget.setText(oldValue);
+                }
+            }
+        });
+        expenses.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d{0,10}([\\.]\\d{0,4})?")) {
+                    expenses.setText(oldValue);
+                }
+            }
+        });
+        bills.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d{0,10}([\\.]\\d{0,4})?")) {
+                    bills.setText(oldValue);
+                }
+            }
+        });
+        income.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d{0,10}([\\.]\\d{0,4})?")) {
+                    income.setText(oldValue);
+                }
+            }
+        });
 
         saveBtn.setOnAction(e -> {
             settings = new Settings(username.getText(), budget.getText(), expenses.getText(), bills.getText(), income.getText());
@@ -57,8 +93,9 @@ public class SettingsController implements Initializable {
             thisStage.close();
             DashboardController dashboardController = new DashboardController();
             dashboardController.showStage();
-
-
+        });
+        closeBtn.setOnAction(e -> {
+            thisStage.close();
         });
     }
 
