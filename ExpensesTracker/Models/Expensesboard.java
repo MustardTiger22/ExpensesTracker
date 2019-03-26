@@ -15,7 +15,4 @@ import java.util.ResourceBundle;
 
 public class Expensesboard {
 
-
-
-
 }

@@ -7,10 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -21,7 +18,7 @@ public class ExpensesBoardController implements Initializable {
     private final Stage thisStage;
     private Dashboard dashboard;
     @FXML private TableView<Expenses> expensesTableView;
-    @FXML private TableColumn<Expenses, String> dateColumn;
+    @FXML private TableColumn<Expenses, DatePicker> dateColumn;
     @FXML private TableColumn<Expenses, String> descriptionColumn;
     @FXML private TableColumn<Expenses, String> categoryColumn;
     @FXML private TableColumn<Expenses, String> amountColumn;
@@ -48,26 +45,26 @@ public class ExpensesBoardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        dateColumn.setCellValueFactory(new PropertyValueFactory<Expenses, String>("date"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<Expenses, DatePicker>("date"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<Expenses, String>("description"));
         categoryColumn.setCellValueFactory(new PropertyValueFactory<Expenses, String>("category"));
         amountColumn.setCellValueFactory(new PropertyValueFactory<Expenses, String>("amount"));
 
         //Table properties
-        expensesTableView.setItems(dashboard.getExpensesList());
+        expensesTableView.setItems(dashboard.getExpensesList().getList());
         expensesTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         expensesTableView.editableProperty().setValue(true);
 
 
         //Buttons
         editBtn.setOnAction(e -> {
-
+            dashboard.getExpensesList().saveExpensesToFile();
         });
 
         deleteBtn.setOnAction(e -> {
             ObservableList<Expenses> allExpenses = expensesTableView.getItems();
             Expenses selectedRow = expensesTableView.getSelectionModel().getSelectedItem();
-            dashboard.getExpensesList().remove(selectedRow);
+            dashboard.getExpensesList().getList().remove(selectedRow);
             allExpenses.remove(selectedRow);
 
         });

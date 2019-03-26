@@ -52,7 +52,7 @@ public class AddexpenseController implements Initializable {
         try {
 
 
-            dashboard.addToList(gettedDatePickerDate.toString(), description.getText(), category.getText(), amount.getText());
+            dashboard.getExpensesList().addToList(date, description.getText(), category.getText(), amount.getText());
 //            System.out.println(dashboard.getExpenses().getId());
         }
         catch (NullPointerException e) {
