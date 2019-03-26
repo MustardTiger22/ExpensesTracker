@@ -21,7 +21,7 @@ public class ExpensesBoardController implements Initializable {
     @FXML private TableColumn<Expenses, String> dateColumn;
     @FXML private TableColumn<Expenses, String> descriptionColumn;
     @FXML private TableColumn<Expenses, String> categoryColumn;
-    @FXML private TableColumn<Expenses, Double> amountColumn;
+    @FXML private TableColumn<Expenses, Double> priceColumn;
     @FXML private Button editBtn;
     @FXML private Button deleteBtn;
 
@@ -48,7 +48,7 @@ public class ExpensesBoardController implements Initializable {
         dateColumn.setCellValueFactory(new PropertyValueFactory<Expenses, String>("date"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<Expenses, String>("description"));
         categoryColumn.setCellValueFactory(new PropertyValueFactory<Expenses, String>("category"));
-        amountColumn.setCellValueFactory(new PropertyValueFactory<Expenses, Double>("amount"));
+        priceColumn.setCellValueFactory(new PropertyValueFactory<Expenses, Double>("price"));
 
         //Table properties
         expensesTableView.setItems(dashboard.getExpensesList().getList());

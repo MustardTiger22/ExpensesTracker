@@ -90,12 +90,15 @@ public class SettingsController implements Initializable {
             settings = new Settings(username.getText(), budget.getText(), expenses.getText(), bills.getText(), income.getText());
             settings.SaveSettings();
             //dashboard.setPieChartData(budget.getText(), expenses.getText(), bills.getText(), income.getText());
-            thisStage.close();
             DashboardController dashboardController = new DashboardController();
             dashboardController.showStage();
+            thisStage.close();
         });
         closeBtn.setOnAction(e -> {
+            DashboardController dashboardController = new DashboardController();
+            dashboardController.showStage();
             thisStage.close();
+
         });
     }
 

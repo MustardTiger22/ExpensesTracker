@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
@@ -8,14 +9,13 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="433.0" prefWidth="400.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="433.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <DatePicker fx:id="date" layoutX="100.0" layoutY="55.0" />
       <Button fx:id="saveBtn" layoutX="55.0" layoutY="389.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="90.0" text="Save" />
       <Button fx:id="cancelBtn" layoutX="249.0" layoutY="389.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="90.0" text="Cancel" />
-      <TextField fx:id="category" layoutX="100.0" layoutY="122.0" prefHeight="27.0" prefWidth="194.0" />
       <TextArea fx:id="description" layoutX="30.0" layoutY="256.0" prefHeight="118.0" prefWidth="349.0" />
-      <TextField fx:id="amount" layoutX="100.0" layoutY="189.0" prefHeight="27.0" prefWidth="194.0" />
+      <TextField fx:id="price" layoutX="100.0" layoutY="189.0" prefHeight="27.0" prefWidth="194.0" />
       <Label alignment="CENTER" layoutX="151.0" layoutY="14.0" prefHeight="40.0" prefWidth="100.0" text="Date">
          <font>
             <Font name="Lato Regular" size="21.0" />
@@ -26,7 +26,7 @@
             <Font name="Lato Regular" size="21.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="147.0" layoutY="149.0" prefHeight="40.0" prefWidth="100.0" text="Amount">
+      <Label alignment="CENTER" layoutX="147.0" layoutY="149.0" prefHeight="40.0" prefWidth="100.0" text="Price">
          <font>
             <Font name="Lato Regular" size="21.0" />
          </font>
@@ -36,5 +36,6 @@
             <Font name="Lato Regular" size="21.0" />
          </font>
       </Label>
+      <ChoiceBox fx:id="categoryBox" layoutX="100.0" layoutY="122.0" prefHeight="27.0" prefWidth="194.0" />
    </children>
 </Pane>

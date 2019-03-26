@@ -50,18 +50,32 @@ public class DashboardController implements Initializable {
     }
 
     public void showStage(){
-        thisStage.showAndWait();
+        thisStage.show();
     }
 
+    public void setExpensesLabel() {
+        expenses.setText(dashboard.getExpensesList().getSumOfExpenses().toString());
+    }
+
+    public void setRecapPieChart() {
+        ObservableList<PieChart.Data> pieChartData =
+                FXCollections.observableArrayList(
+                        new PieChart.Data("Expenses", dashboard.getExpensesList().getSumOfExpenses()),
+                        new PieChart.Data("Income", Double.parseDouble(income.getText())),
+                        new PieChart.Data("Budget", Double.parseDouble(budget.getText())),
+                        new PieChart.Data("Bills", Double.parseDouble(bills.getText())));
+        recapPieChart.setData(pieChartData);
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if(userSettings.IfTheFileExists()) {
             userSettings = new Settings();
             userSettings.LoadSettings(username, budget, expenses, bills, income);
-            //setRecapPieChart();
+            setExpensesLabel();
         }
         dateValue.setText(dashboard.getFormattedDate());
+        setRecapPieChart();
 
         showExpensesBoardBtn.setOnAction(e -> {
             ExpensesBoardController expensesBoardController = new ExpensesBoardController(dashboard);
@@ -70,21 +84,18 @@ public class DashboardController implements Initializable {
         addExpenseBtn.setOnAction(e -> {
             AddexpenseController addexpenseController = new AddexpenseController(dashboard);
             addexpenseController.showStage();
+            if(addexpenseController.getSaveButtonPressed()) {
+                setExpensesLabel();
+                setRecapPieChart();
+
+            }
         });
         settingsBtn.setOnAction(e -> {
             thisStage.close();
             SettingsController settingsController = new SettingsController(dashboard);
             settingsController.showStage();
-
         });
 
-        //Pie chart
-        ObservableList<PieChart.Data> pieChartData =
-                FXCollections.observableArrayList(
-                        new PieChart.Data("Expenses", Double.parseDouble(expenses.getText())),
-                        new PieChart.Data("Income", Double.parseDouble(income.getText())),
-                        new PieChart.Data("Budget", Double.parseDouble(budget.getText())),
-                        new PieChart.Data("Bills", Double.parseDouble(bills.getText())));
-        recapPieChart.setData(pieChartData);
+
     }
 }

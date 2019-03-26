@@ -1,5 +1,7 @@
 package ExpensesTracker.Models;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.DatePicker;
@@ -15,16 +17,15 @@ public class ExpensesList implements Serializable {
         return expensesList;
     }
 
-
     public ExpensesList() {
         if(IfTheFileExists()) {
             loadExpenseFromFile();
         }
     }
 
-    public void addToList(String datePicker, String description, String category, String amount) {
+    public void addToList(String datePicker, String description, String category, String price) {
         try {
-            expensesList.add(new Expenses(datePicker, description, category , amount));
+            expensesList.add(new Expenses(datePicker, description, category , price));
         }
         catch (NullPointerException e) {
             e.printStackTrace();
@@ -39,6 +40,8 @@ public class ExpensesList implements Serializable {
         }
     }
 
+
+    //Serialize the expensesList to file. Path = "Configuration/expenestable.ser"
     public void saveExpensesToFile() {
         try
         {
@@ -54,7 +57,7 @@ public class ExpensesList implements Serializable {
             ioe.printStackTrace();
         }
     }
-
+    //Load from the expensesList file. Path = "Configuration/expenestable.ser"
     public void loadExpenseFromFile() {
         try {
             FileInputStream fis = new FileInputStream("Configuration/expensestable.ser");
@@ -67,7 +70,7 @@ public class ExpensesList implements Serializable {
             e.printStackTrace();
         }
     }
-
+    //Check if the expenseslist already exists
     public static Boolean IfTheFileExists(){
         new File("./Configuration").mkdirs();
         String filePathString = "Configuration/expensestable.ser";
@@ -78,4 +81,11 @@ public class ExpensesList implements Serializable {
         return false;
     }
 
+    public Double getSumOfExpenses() {
+        double sum = 0;
+        for(Expenses e : expensesList) {
+            sum +=e.getPriceDouble();
+        }
+        return sum;
+    }
 }
