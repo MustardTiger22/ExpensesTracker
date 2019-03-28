@@ -17,6 +17,7 @@ import java.util.ResourceBundle;
 public class ExpensesBoardController implements Initializable {
     private final Stage thisStage;
     private Dashboard dashboard;
+    private Boolean hasPressedDeleteButton = false;
     @FXML private TableView<Expenses> expensesTableView;
     @FXML private TableColumn<Expenses, String> dateColumn;
     @FXML private TableColumn<Expenses, String> descriptionColumn;
@@ -39,6 +40,10 @@ public class ExpensesBoardController implements Initializable {
         }
     }
 
+    public Boolean getHasPressedDeleteButton() {
+        return hasPressedDeleteButton;
+    }
+
     public void showStage() {
         thisStage.showAndWait();
     }
@@ -51,23 +56,27 @@ public class ExpensesBoardController implements Initializable {
         priceColumn.setCellValueFactory(new PropertyValueFactory<Expenses, Double>("price"));
 
         //Table properties
-        expensesTableView.setItems(dashboard.getExpensesList().getList());
+        expensesTableView.setItems(dashboard.getExpensesListObj().getList());
         expensesTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         expensesTableView.editableProperty().setValue(true);
 
 
         //Buttons
         editBtn.setOnAction(e -> {
-            dashboard.getExpensesList().saveExpensesToFile();
+            dashboard.getExpensesListObj().saveExpensesToFile();
             System.out.println("Saved to file.");
         });
 
         deleteBtn.setOnAction(e -> {
             ObservableList<Expenses> allExpenses = expensesTableView.getItems();
             Expenses selectedRow = expensesTableView.getSelectionModel().getSelectedItem();
-            System.out.println(selectedRow.getDescription());
-            dashboard.getExpensesList().getList().remove(selectedRow);
-            allExpenses.remove(selectedRow);
+            if(selectedRow != null) {
+                System.out.println(selectedRow.getDateObject().getMonth());
+                System.out.println(selectedRow.getDateObject().getYear());
+                dashboard.getExpensesListObj().getList().remove(selectedRow);
+                allExpenses.remove(selectedRow);
+                hasPressedDeleteButton = true;
+            }
 
         });
     }

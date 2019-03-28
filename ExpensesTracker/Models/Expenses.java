@@ -5,6 +5,8 @@ import javafx.scene.control.DatePicker;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 
@@ -13,7 +15,7 @@ public class Expenses implements Serializable {
     private String description;
     private String category;
     private String price;
-    private Date dateObj;
+    private LocalDate dateObj;
 
     public String getDate() {
         return date;
@@ -37,12 +39,12 @@ public class Expenses implements Serializable {
         this.date = date;
     }
 
-    public Date getDateObject(){
+
+    public LocalDate getDateObject(){
         try{
-            dateObj = new SimpleDateFormat("yyyy-MM-dd").parse(getDate());
-            return dateObj;
+            return LocalDate.parse(getDate());
         }
-        catch (ParseException e) {
+        catch (NullPointerException e) {
             e.printStackTrace();
             return null;
         }

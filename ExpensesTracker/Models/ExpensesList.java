@@ -22,6 +22,10 @@ public class ExpensesList implements Serializable {
             loadExpenseFromFile();
         }
     }
+    public ObservableList<Expenses> getExpensesList() {
+        return expensesList;
+    }
+
 
     public void addToList(String datePicker, String description, String category, String price) {
         try {
@@ -39,7 +43,6 @@ public class ExpensesList implements Serializable {
             e.printStackTrace();
         }
     }
-
 
     //Serialize the expensesList to file. Path = "Configuration/expenestable.ser"
     public void saveExpensesToFile() {
@@ -80,11 +83,23 @@ public class ExpensesList implements Serializable {
 
         return false;
     }
-
+    //return a sum of price every item in the expenses collection
     public Double getSumOfExpenses() {
-        double sum = 0;
+        Double sum = 0.0;
         for(Expenses e : expensesList) {
             sum +=e.getPriceDouble();
+        }
+        return sum;
+    }
+
+
+    //getMonthValue()-1 because it returns an int value from 1 to 12 and we get in the method a parameter Calendar.getYear() which starts with 0.
+    public Double getSumOfTheParticularCategoryInGivenMonthAndYear(String category, int month, int year){
+        Double sum = 0.0;
+        for(Expenses e : expensesList) {
+            if(e.getCategory().contentEquals(category) && (e.getDateObject().getMonthValue()-1) == month && e.getDateObject().getYear() == year) {
+                sum += Double.parseDouble(e.getPrice());
+            }
         }
         return sum;
     }

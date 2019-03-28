@@ -66,7 +66,7 @@ public class AddexpenseController implements Initializable {
         categoryBox.setValue("Food");
 
         saveBtn.setOnAction(e -> {
-            dashboard.getExpensesList().addToList(date.getValue().toString(), description.getText(), categoryBox.getValue(), price.getText());
+            dashboard.getExpensesListObj().addToList(date.getValue().toString(), description.getText(), categoryBox.getValue(), price.getText());
             saveButtonPressed = true;
             thisStage.close();
         });

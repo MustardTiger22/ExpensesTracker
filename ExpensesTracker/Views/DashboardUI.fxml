@@ -5,16 +5,15 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <HBox prefHeight="198.0" prefWidth="704.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="422.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <children>
             <VBox prefHeight="300.0" prefWidth="400.0">
                <children>
@@ -29,7 +28,7 @@
                            </image></ImageView>
                      </graphic>
                   </Label>
-                  <Label fx:id="check" alignment="CENTER" prefHeight="60.0" prefWidth="400.0" text="Bills            ">
+                  <Label alignment="CENTER" prefHeight="60.0" prefWidth="400.0" text="Bills            ">
                      <font>
                         <Font name="Lato Bold" size="25.0" />
                      </font>
@@ -65,26 +64,36 @@
                         </ImageView>
                      </graphic>
                   </Label>
+                  <Label alignment="CENTER" prefHeight="60.0" prefWidth="400.0" text="Your balance">
+                     <font>
+                        <Font name="Lato Bold" size="25.0" />
+                     </font>
+                  </Label>
                </children>
             </VBox>
             <VBox prefHeight="300.0" prefWidth="400.0">
                <children>
-                  <Label fx:id="expenses" alignment="CENTER" prefHeight="60.0" prefWidth="400.0" text="800.0">
+                  <Label fx:id="expenses" alignment="CENTER" prefHeight="60.0" prefWidth="400.0" text="0.0">
                      <font>
                         <Font name="Lato Bold" size="25.0" />
                      </font>
                   </Label>
-                  <Label fx:id="bills" alignment="CENTER" prefHeight="60.0" prefWidth="400.0" text="600.0">
+                  <Label fx:id="bills" alignment="CENTER" prefHeight="60.0" prefWidth="400.0" text="0.0">
                      <font>
                         <Font name="Lato Bold" size="25.0" />
                      </font>
                   </Label>
-                  <Label fx:id="income" alignment="CENTER" prefHeight="60.0" prefWidth="400.0" text="2000.0">
+                  <Label fx:id="income" alignment="CENTER" prefHeight="60.0" prefWidth="400.0" text="0.0">
                      <font>
                         <Font name="Lato Bold" size="25.0" />
                      </font>
                   </Label>
-                  <Label fx:id="budget" alignment="CENTER" prefHeight="60.0" prefWidth="400.0" text="1500.0">
+                  <Label fx:id="budget" alignment="CENTER" prefHeight="60.0" prefWidth="400.0" text="0.0">
+                     <font>
+                        <Font name="Lato Bold" size="25.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="balance" alignment="CENTER" prefHeight="60.0" prefWidth="400.0" text="0.0">
                      <font>
                         <Font name="Lato Bold" size="25.0" />
                      </font>
@@ -95,42 +104,39 @@
       </HBox>
    </center>
    <top>
-      <VBox prefHeight="142.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Pane prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <Label layoutX="310.0" layoutY="25.0" text="Dashboard">
-                     <font>
-                        <Font name="Lato Black" size="36.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="dateValue" layoutX="330.0" layoutY="86.0" text="dd/mm/yyyy">
-                     <font>
-                        <Font name="Lato-Light" size="24.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="username" alignment="CENTER" contentDisplay="CENTER" layoutX="658.0" layoutY="11.0" prefHeight="29.0" prefWidth="135.0" text="username">
-                     <font>
-                        <Font name="Lato Regular" size="20.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="addExpenseBtn" layoutX="569.0" layoutY="54.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="56.0" text="+">
-                     <font>
-                        <Font name="Lato Bold" size="38.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="showExpensesBoardBtn" layoutX="667.0" layoutY="58.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="96.0" text="Show Recap" />
-                  <Button fx:id="settingsBtn" layoutX="74.0" layoutY="44.0" mnemonicParsing="false" text="Settings" />
-               </children>
-            </Pane>
+            <Label layoutX="310.0" layoutY="27.0" text="Dashboard">
+               <font>
+                  <Font name="Lato Black" size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="dateValue" layoutX="330.0" layoutY="86.0" text="dd/mm/yyyy">
+               <font>
+                  <Font name="Lato-Light" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="username" alignment="CENTER" contentDisplay="CENTER" layoutX="102.0" layoutY="13.0" prefHeight="29.0" prefWidth="135.0" text="username">
+               <font>
+                  <Font name="Lato Regular" size="20.0" />
+               </font>
+            </Label>
+            <Button fx:id="addExpenseBtn" layoutX="33.0" layoutY="98.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="56.0" text="+">
+               <font>
+                  <Font name="Lato Bold" size="38.0" />
+               </font>
+            </Button>
+            <Button fx:id="showExpensesBoardBtn" layoutX="603.0" layoutY="66.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="96.0" text="Show Recap" />
+            <Button fx:id="settingsBtn" layoutX="33.0" layoutY="14.0" mnemonicParsing="false" text="Settings" />
          </children>
-      </VBox>
+      </AnchorPane>
    </top>
    <bottom>
-      <StackPane prefHeight="350.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="275.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <children>
-            <PieChart fx:id="recapPieChart" StackPane.alignment="CENTER" />
+            <PieChart fx:id="recapPieChart" layoutX="7.0" prefHeight="275.0" prefWidth="400.0" />
+            <PieChart fx:id="categoryPieChart" layoutX="407.0" prefHeight="275.0" prefWidth="400.0" />
          </children>
-      </StackPane>
+      </AnchorPane>
    </bottom>
 </BorderPane>

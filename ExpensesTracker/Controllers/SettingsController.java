@@ -21,7 +21,6 @@ public class SettingsController implements Initializable {
     Dashboard dashboard;
     @FXML private TextField username;
     @FXML private TextField budget;
-    @FXML private TextField expenses;
     @FXML private TextField bills;
     @FXML private TextField income;
     @FXML private Button saveBtn;
@@ -50,7 +49,7 @@ public class SettingsController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         if(settings.IfTheFileExists()) {
             settings = new Settings();
-            settings.LoadSettings(username, budget, expenses, bills, income);
+            settings.LoadSettings(username, budget, bills, income);
         }
         //Sets the field to numeric fields
         budget.textProperty().addListener(new ChangeListener<String>() {
@@ -58,14 +57,6 @@ public class SettingsController implements Initializable {
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 if (!newValue.matches("\\d{0,10}([\\.]\\d{0,4})?")) {
                     budget.setText(oldValue);
-                }
-            }
-        });
-        expenses.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!newValue.matches("\\d{0,10}([\\.]\\d{0,4})?")) {
-                    expenses.setText(oldValue);
                 }
             }
         });
@@ -87,7 +78,7 @@ public class SettingsController implements Initializable {
         });
 
         saveBtn.setOnAction(e -> {
-            settings = new Settings(username.getText(), budget.getText(), expenses.getText(), bills.getText(), income.getText());
+            settings = new Settings(username.getText(), budget.getText(), bills.getText(), income.getText());
             settings.SaveSettings();
             //dashboard.setPieChartData(budget.getText(), expenses.getText(), bills.getText(), income.getText());
             DashboardController dashboardController = new DashboardController();
