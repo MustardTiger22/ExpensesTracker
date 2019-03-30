@@ -12,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class ExpensesBoardController implements Initializable {
@@ -19,7 +20,7 @@ public class ExpensesBoardController implements Initializable {
     private Dashboard dashboard;
     private Boolean hasPressedDeleteButton = false;
     @FXML private TableView<Expenses> expensesTableView;
-    @FXML private TableColumn<Expenses, String> dateColumn;
+    @FXML private TableColumn<Expenses, LocalDate> dateColumn;
     @FXML private TableColumn<Expenses, String> descriptionColumn;
     @FXML private TableColumn<Expenses, String> categoryColumn;
     @FXML private TableColumn<Expenses, Double> priceColumn;
@@ -50,7 +51,7 @@ public class ExpensesBoardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        dateColumn.setCellValueFactory(new PropertyValueFactory<Expenses, String>("date"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<Expenses, LocalDate>("date"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<Expenses, String>("description"));
         categoryColumn.setCellValueFactory(new PropertyValueFactory<Expenses, String>("category"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<Expenses, Double>("price"));

@@ -84,10 +84,13 @@ public class ExpensesList implements Serializable {
         return false;
     }
     //return a sum of price every item in the expenses collection
-    public Double getSumOfExpenses() {
+
+    public Double getSumOfExpensesInGivenMonthAndYear(int month, int year) {
         Double sum = 0.0;
         for(Expenses e : expensesList) {
-            sum +=e.getPriceDouble();
+            if ((e.getDateObject().getMonthValue() - 1) == month && e.getDateObject().getYear() == year) {
+                sum += e.getPriceDouble();
+            }
         }
         return sum;
     }

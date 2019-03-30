@@ -17,5 +17,9 @@ public class Dashboard {
     public String getFormattedDate() {
         return formattedDateString;
     }
+    public void setFormattedDateString(int month, int year) {
+        cal.set(year, month, 1);
+        formattedDateString = cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH) + " " + cal.get(Calendar.YEAR);
+    }
 
 }

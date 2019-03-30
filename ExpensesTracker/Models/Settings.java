@@ -3,6 +3,7 @@ package ExpensesTracker.Models;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import java.io.*;
+import java.util.Set;
 
 
 public class Settings implements Serializable {
@@ -49,13 +50,11 @@ public class Settings implements Serializable {
         return income;
     }
 
-
     public void SaveSettings() {
         try {
             new File("./Configuration").mkdirs();
             FileOutputStream fs = new FileOutputStream("Configuration/usersettings.ser");
             ObjectOutputStream os = new ObjectOutputStream(fs);
-
             os.writeObject(this);
             os.close();
             System.out.println("Settings saved.");
@@ -86,6 +85,11 @@ public class Settings implements Serializable {
         budget.setText(getBudget());
         bills.setText(getBills());
         income.setText(getIncome());
+    }
+
+    public Settings LoadSettingsObject() {
+        Settings se = new Settings();
+        return se;
     }
 
     public void LoadSettings(Label username, Label budget, Label bills,  Label income) {

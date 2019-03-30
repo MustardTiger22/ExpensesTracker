@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
 public class SettingsController implements Initializable {
     private final Stage thisStage;
     private Settings settings;
-    Dashboard dashboard;
+    private Dashboard dashboard;
     @FXML private TextField username;
     @FXML private TextField budget;
     @FXML private TextField bills;
@@ -80,7 +80,6 @@ public class SettingsController implements Initializable {
         saveBtn.setOnAction(e -> {
             settings = new Settings(username.getText(), budget.getText(), bills.getText(), income.getText());
             settings.SaveSettings();
-            //dashboard.setPieChartData(budget.getText(), expenses.getText(), bills.getText(), income.getText());
             DashboardController dashboardController = new DashboardController();
             dashboardController.showStage();
             thisStage.close();
@@ -89,7 +88,6 @@ public class SettingsController implements Initializable {
             DashboardController dashboardController = new DashboardController();
             dashboardController.showStage();
             thisStage.close();
-
         });
     }
 
