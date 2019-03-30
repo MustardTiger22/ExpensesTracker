@@ -1,13 +1,7 @@
 package ExpensesTracker.Models;
 
-import javafx.scene.control.DatePicker;
-
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 
 
 public class Expenses implements Serializable {
@@ -16,6 +10,16 @@ public class Expenses implements Serializable {
     private String category;
     private String price;
     private LocalDate dateObj;
+
+    public Expenses() {
+
+    }
+    public Expenses(String date, String description, String category, String price) {
+        this.price = price;
+        this.description = description;
+        this.category = category;
+        this.date = date;
+    }
 
     public String getDate() {
         return date;
@@ -28,15 +32,6 @@ public class Expenses implements Serializable {
     }
     public String getPrice() {
         return price;
-    }
-    public Expenses() {
-
-    }
-    public Expenses(String date, String description, String category, String price) {
-        this.price = price;
-        this.description = description;
-        this.category = category;
-        this.date = date;
     }
 
 

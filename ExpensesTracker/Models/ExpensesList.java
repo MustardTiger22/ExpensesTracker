@@ -1,11 +1,7 @@
 package ExpensesTracker.Models;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.DatePicker;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -83,8 +79,8 @@ public class ExpensesList implements Serializable {
 
         return false;
     }
-    //return a sum of price every item in the expenses collection
 
+    //return a sum of price every item in the expenses collection
     public Double getSumOfExpensesInGivenMonthAndYear(int month, int year) {
         Double sum = 0.0;
         for(Expenses e : expensesList) {
@@ -94,7 +90,6 @@ public class ExpensesList implements Serializable {
         }
         return sum;
     }
-
 
     //getMonthValue()-1 because it returns an int value from 1 to 12 and we get in the method a parameter Calendar.getYear() which starts with 0.
     public Double getSumOfTheParticularCategoryInGivenMonthAndYear(String category, int month, int year){

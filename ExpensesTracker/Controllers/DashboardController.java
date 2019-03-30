@@ -2,8 +2,10 @@ package ExpensesTracker.Controllers;
 
 import ExpensesTracker.Models.Dashboard;
 import ExpensesTracker.Models.Settings;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,7 +26,8 @@ import java.util.ResourceBundle;
 public class DashboardController implements Initializable {
     private Dashboard dashboard = new Dashboard();
     private Settings userSettings;
-    //Current date
+    private Boolean thereHasBeenAChange= new Boolean(false);
+    //Sets current date
     private int month =  Calendar.getInstance().get(Calendar.MONTH);
     private int year = Calendar.getInstance().get(Calendar.YEAR);
     private final Stage thisStage;
@@ -45,7 +48,6 @@ public class DashboardController implements Initializable {
     @FXML private Label accounts;
     @FXML private Label balance;
 
-
     public DashboardController() {
         thisStage = new Stage();
         try {
@@ -58,6 +60,9 @@ public class DashboardController implements Initializable {
         catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public Stage dashboardStage(){
+        return thisStage;
     }
 
     public void showStage(){
@@ -72,30 +77,21 @@ public class DashboardController implements Initializable {
     public int getYear() {
         return year;
     }
+    public Boolean getThereHasBeenAChange() {
+        return thereHasBeenAChange;
+    }
 
-    public void setGUI() {
-
-        if(userSettings.IfTheFileExists()) {
+    public void setGUI(int month, int year) {
+        dateValue.setText(dashboard.getFormattedDate());
+        if(userSettings.ifTheFileExists()) {
             userSettings = new Settings();
-            userSettings.LoadSettings(username, budget, bills, income);
+            userSettings.loadSettings(username, budget, bills, income);
             setRecapPieChart(getMonth(), getYear());
             setExpensesLabel(getMonth(), getYear());
             setBalance(getMonth(), getYear());
             setCategoryPieChart(getMonth(), getYear());
-
         }
     }
-    public void setGUI(int month, int year) {
-        if(userSettings.IfTheFileExists()) {
-            userSettings = new Settings();
-            userSettings.LoadSettings(username, budget, bills, income);
-            setRecapPieChart(month, year);
-            setExpensesLabel(month, year);
-            setBalance(month, year);
-            setCategoryPieChart(month, year);
-        }
-    }
-
     public void setExpensesLabel(int month, int year) {
         expenses.setText(dashboard.getExpensesListObj().getSumOfExpensesInGivenMonthAndYear(month, year).toString());
     }
@@ -130,25 +126,26 @@ public class DashboardController implements Initializable {
             }
     }
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         //Loads a settings from file and sets the labels properties and piechart
-        setGUI();
-        System.out.println(Calendar.getInstance().get(Calendar.YEAR));
-        dateValue.setText(dashboard.getFormattedDate());
+        setGUI(month, year);
         showExpensesBoardBtn.setOnAction(e -> {
             ExpensesBoardController expensesBoardController = new ExpensesBoardController(dashboard);
             expensesBoardController.showStage();
             if(expensesBoardController.getHasPressedDeleteButton()) {
-                setGUI();
+                thereHasBeenAChange = true;
+                setGUI(month, year);
             }
         });
         addExpenseBtn.setOnAction(e -> {
             AddexpenseController addexpenseController = new AddexpenseController(dashboard);
             addexpenseController.showStage();
             if(addexpenseController.getSaveButtonPressed()) {
-                setGUI();
+                thereHasBeenAChange = true;
+                setGUI(month, year);
             }
         });
         settingsBtn.setOnAction(e -> {
@@ -181,6 +178,17 @@ public class DashboardController implements Initializable {
             setGUI(month, year);
         });
 
-
+        thisStage.setOnCloseRequest(event -> {
+            if(getThereHasBeenAChange()) {
+                Platform.setImplicitExit(false);
+                ExitWindowController exitWindowController = new ExitWindowController(dashboard, this);
+                exitWindowController.showStage();
+                if (exitWindowController.hasCloseBtnPressed.equals(true)) {
+                    event.consume();
+                } else {
+                    Platform.exit();
+                }
+            }
+        });
     }
 }

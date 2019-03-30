@@ -24,7 +24,7 @@ public class ExpensesBoardController implements Initializable {
     @FXML private TableColumn<Expenses, String> descriptionColumn;
     @FXML private TableColumn<Expenses, String> categoryColumn;
     @FXML private TableColumn<Expenses, Double> priceColumn;
-    @FXML private Button editBtn;
+    @FXML private Button closeBtn;
     @FXML private Button deleteBtn;
 
     public ExpensesBoardController(Dashboard dashboard) {
@@ -63,9 +63,8 @@ public class ExpensesBoardController implements Initializable {
 
 
         //Buttons
-        editBtn.setOnAction(e -> {
-            dashboard.getExpensesListObj().saveExpensesToFile();
-            System.out.println("Saved to file.");
+        closeBtn.setOnAction(e -> {
+            thisStage.close();
         });
 
         deleteBtn.setOnAction(e -> {
