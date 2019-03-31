@@ -5,8 +5,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
@@ -68,43 +66,23 @@
             <Font name="Lato Bold" size="25.0" />
          </font>
       </Label>
-      <AnchorPane prefHeight="80.0" prefWidth="600.0" style="-fx-background-color: #00796B;">
+      <AnchorPane prefHeight="80.0" prefWidth="600.0" style="-fx-background-color: #00796B;" stylesheets="@../../Styles.css">
          <children>
-            <Button fx:id="addExpenseBtn" contentDisplay="GRAPHIC_ONLY" layoutX="516.0" layoutY="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #fff;">
+            <Button fx:id="addExpenseBtn" contentDisplay="CENTER" layoutX="369.0" layoutY="14.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="82.0" style="-fx-font-size: 24;" stylesheets="@../../Styles.css" text="Add">
                <font>
                   <Font name="Lato Bold" size="15.0" />
                </font>
-               <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/icons8-plus-48.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
             </Button>
-            <Button fx:id="settingsBtn" contentDisplay="GRAPHIC_ONLY" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" style="-fx-background-color: #fff;" text="Settings">
-               <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/icons8-settings-48.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Label fx:id="username" alignment="CENTER" contentDisplay="CENTER" layoutX="222.0" layoutY="25.0" prefHeight="29.0" prefWidth="135.0" text="username" textFill="WHITE">
+            <Button fx:id="settingsBtn" contentDisplay="CENTER" layoutX="14.0" layoutY="17.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="135.0" text="Settings" textFill="WHITE">
+               <font>
+                  <Font name="Lato Bold" size="24.0" />
+               </font></Button>
+            <Label fx:id="username" alignment="CENTER" contentDisplay="CENTER" layoutX="465.0" layoutY="3.0" prefHeight="29.0" prefWidth="135.0" text="username" textFill="WHITE">
                <font>
                   <Font name="Lato Regular" size="20.0" />
                </font>
             </Label>
-            <Button fx:id="showExpensesBoardBtn" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" layoutX="105.0" layoutY="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: white;" textFill="TRANSPARENT">
-               <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/icons8-calendar-48.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
+            <Button fx:id="showExpensesBoardBtn" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="172.0" layoutY="14.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="171.0" stylesheets="@../../Styles.css" text="Show board" textFill="TRANSPARENT" />
          </children>
       </AnchorPane>
       <TabPane fx:id="tabPane" layoutY="518.0" prefHeight="346.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">

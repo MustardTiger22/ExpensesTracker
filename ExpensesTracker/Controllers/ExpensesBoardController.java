@@ -35,6 +35,7 @@ public class ExpensesBoardController implements Initializable {
             loader.setController(this);
             thisStage.setScene(new Scene(loader.load()));
             thisStage.setTitle("Expenses board");
+            thisStage.resizableProperty().setValue(false);
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -59,8 +60,6 @@ public class ExpensesBoardController implements Initializable {
         //Table properties
         expensesTableView.setItems(dashboard.getExpensesListObj().getList());
         expensesTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        expensesTableView.editableProperty().setValue(true);
-
 
         //Buttons
         closeBtn.setOnAction(e -> {
@@ -71,8 +70,6 @@ public class ExpensesBoardController implements Initializable {
             ObservableList<Expenses> allExpenses = expensesTableView.getItems();
             Expenses selectedRow = expensesTableView.getSelectionModel().getSelectedItem();
             if(selectedRow != null) {
-                System.out.println(selectedRow.getDateObject().getMonth());
-                System.out.println(selectedRow.getDateObject().getYear());
                 dashboard.getExpensesListObj().getList().remove(selectedRow);
                 allExpenses.remove(selectedRow);
                 hasPressedDeleteButton = true;
