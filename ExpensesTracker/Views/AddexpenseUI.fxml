@@ -16,7 +16,7 @@
       <Button fx:id="cancelBtn" layoutX="249.0" layoutY="389.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="90.0" text="Cancel" />
       <TextArea fx:id="description" layoutX="30.0" layoutY="256.0" prefHeight="118.0" prefWidth="349.0" />
       <TextField fx:id="price" layoutX="100.0" layoutY="189.0" prefHeight="27.0" prefWidth="194.0" />
-      <Label alignment="CENTER" layoutX="151.0" layoutY="14.0" prefHeight="40.0" prefWidth="100.0" text="Date">
+      <Label alignment="CENTER" layoutX="147.0" layoutY="14.0" prefHeight="40.0" prefWidth="100.0" text="Date">
          <font>
             <Font name="Lato Regular" size="21.0" />
          </font>
