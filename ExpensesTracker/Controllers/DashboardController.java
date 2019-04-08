@@ -1,5 +1,6 @@
 package ExpensesTracker.Controllers;
 
+import Connectivity.BaseConnection;
 import ExpensesTracker.Models.Dashboard;
 import ExpensesTracker.Models.Settings;
 import javafx.application.Platform;
@@ -26,11 +27,12 @@ import java.util.ResourceBundle;
 public class DashboardController implements Initializable {
     private Dashboard dashboard = new Dashboard();
     private Settings userSettings;
-    private Boolean thereHasBeenAChange= new Boolean(false);
     //Sets current date
     private int month =  Calendar.getInstance().get(Calendar.MONTH);
     private int year = Calendar.getInstance().get(Calendar.YEAR);
     private final Stage thisStage;
+    private BaseConnection database;
+
     @FXML private Button showExpensesBoardBtn;
     @FXML private Button addExpenseBtn;
     @FXML private Button settingsBtn;
@@ -77,9 +79,6 @@ public class DashboardController implements Initializable {
     public int getYear() {
         return year;
     }
-    public Boolean getThereHasBeenAChange() {
-        return thereHasBeenAChange;
-    }
 
     public void setGUI(int month, int year) {
         dateValue.setText(dashboard.getFormattedDate());
@@ -93,12 +92,12 @@ public class DashboardController implements Initializable {
         }
     }
     public void setExpensesLabel(int month, int year) {
-        expenses.setText(dashboard.getExpensesListObj().getSumOfExpensesInGivenMonthAndYear(month, year).toString());
+        expenses.setText(dashboard.getListOfExpenses().getSumOfExpensesInGivenMonthAndYear(month, year).toString());
     }
     public void setRecapPieChart(int month, int year) {
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(
-                        new PieChart.Data("Expenses", dashboard.getExpensesListObj().getSumOfExpensesInGivenMonthAndYear(month, year)),
+                        new PieChart.Data("Expenses", dashboard.getListOfExpenses().getSumOfExpensesInGivenMonthAndYear(month, year)),
                         new PieChart.Data("Income", Double.parseDouble(income.getText())),
                         new PieChart.Data("Budget", Double.parseDouble(budget.getText())),
                         new PieChart.Data("Bills", Double.parseDouble(bills.getText())));
@@ -106,17 +105,17 @@ public class DashboardController implements Initializable {
     }
     public void setCategoryPieChart(int month, int year) {
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                new PieChart.Data("Food", dashboard.getExpensesListObj().getSumOfTheParticularCategoryInGivenMonthAndYear("Food", month, year)),
-                new PieChart.Data("Clothes", dashboard.getExpensesListObj().getSumOfTheParticularCategoryInGivenMonthAndYear("Clothes", month, year)),
-                new PieChart.Data("Hobby", dashboard.getExpensesListObj().getSumOfTheParticularCategoryInGivenMonthAndYear("Hobby", month, year)),
-                new PieChart.Data("Transport", dashboard.getExpensesListObj().getSumOfTheParticularCategoryInGivenMonthAndYear("Transport",  month, year)),
-                new PieChart.Data("Health, hygiene and chemistry", dashboard.getExpensesListObj().getSumOfTheParticularCategoryInGivenMonthAndYear("Health, hygiene and chemistry", month, year)),
-                new PieChart.Data("Other", dashboard.getExpensesListObj().getSumOfTheParticularCategoryInGivenMonthAndYear("Other", month, year)));
+                new PieChart.Data("Food", dashboard.getListOfExpenses().getSumOfTheParticularCategoryInGivenMonthAndYear("Food", month, year)),
+                new PieChart.Data("Clothes", dashboard.getListOfExpenses().getSumOfTheParticularCategoryInGivenMonthAndYear("Clothes", month, year)),
+                new PieChart.Data("Hobby", dashboard.getListOfExpenses().getSumOfTheParticularCategoryInGivenMonthAndYear("Hobby", month, year)),
+                new PieChart.Data("Transport", dashboard.getListOfExpenses().getSumOfTheParticularCategoryInGivenMonthAndYear("Transport",  month, year)),
+                new PieChart.Data("Health, hygiene and chemistry", dashboard.getListOfExpenses().getSumOfTheParticularCategoryInGivenMonthAndYear("Health, hygiene and chemistry", month, year)),
+                new PieChart.Data("Other", dashboard.getListOfExpenses().getSumOfTheParticularCategoryInGivenMonthAndYear("Other", month, year)));
         categoryPieChart.setData(pieChartData);
     }
     public void setBalance(int month, int year) {
             //computedBalance = Budget - bills - expenses
-            Double computedBalance = Double.parseDouble(userSettings.getBudget()) - dashboard.getExpensesListObj().getSumOfExpensesInGivenMonthAndYear(month, year) - Double.parseDouble(userSettings.getBills());
+            Double computedBalance = Double.parseDouble(userSettings.getBudget()) - dashboard.getListOfExpenses().getSumOfExpensesInGivenMonthAndYear(month, year) - Double.parseDouble(userSettings.getBills());
             balance.setText(computedBalance.toString());
             if(computedBalance > 0) {
                 balance.setTextFill(Color.web("#2eb82e"));
@@ -135,16 +134,14 @@ public class DashboardController implements Initializable {
         showExpensesBoardBtn.setOnAction(e -> {
             ExpensesBoardController expensesBoardController = new ExpensesBoardController(dashboard);
             expensesBoardController.showStage();
-            if(expensesBoardController.getHasPressedDeleteButton()) {
-                thereHasBeenAChange = true;
+            if(dashboard.getOriginalListHash() != dashboard.getListOfExpenses().hashCode()) {
                 setGUI(month, year);
             }
         });
         addExpenseBtn.setOnAction(e -> {
             AddexpenseController addexpenseController = new AddexpenseController(dashboard);
             addexpenseController.showStage();
-            if(addexpenseController.getSaveButtonPressed()) {
-                thereHasBeenAChange = true;
+            if(dashboard.getOriginalListHash() != dashboard.getListOfExpenses().hashCode()) {
                 setGUI(month, year);
             }
         });
@@ -179,9 +176,9 @@ public class DashboardController implements Initializable {
         });
 
         thisStage.setOnCloseRequest(event -> {
-            if(getThereHasBeenAChange()) {
+            if(!dashboard.getOriginalListHash().equals(dashboard.getListOfExpenses().hashCode())) {
                 Platform.setImplicitExit(false);
-                ExitWindowController exitWindowController = new ExitWindowController(dashboard, this);
+                ExitWindowController exitWindowController = new ExitWindowController(dashboard, this, database);
                 exitWindowController.showStage();
                 if (exitWindowController.hasCloseBtnPressed.equals(true)) {
                     event.consume();

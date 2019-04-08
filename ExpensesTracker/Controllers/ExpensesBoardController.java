@@ -18,7 +18,6 @@ import java.util.ResourceBundle;
 public class ExpensesBoardController implements Initializable {
     private final Stage thisStage;
     private Dashboard dashboard;
-    private Boolean hasPressedDeleteButton = false;
     @FXML private TableView<Expenses> expensesTableView;
     @FXML private TableColumn<Expenses, LocalDate> dateColumn;
     @FXML private TableColumn<Expenses, String> descriptionColumn;
@@ -42,10 +41,6 @@ public class ExpensesBoardController implements Initializable {
         }
     }
 
-    public Boolean getHasPressedDeleteButton() {
-        return hasPressedDeleteButton;
-    }
-
     public void showStage() {
         thisStage.showAndWait();
     }
@@ -58,7 +53,7 @@ public class ExpensesBoardController implements Initializable {
         priceColumn.setCellValueFactory(new PropertyValueFactory<Expenses, Double>("price"));
 
         //Table properties
-        expensesTableView.setItems(dashboard.getExpensesListObj().getList());
+        expensesTableView.setItems(dashboard.getListOfExpenses().getList());
         expensesTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
         //Buttons
@@ -70,9 +65,8 @@ public class ExpensesBoardController implements Initializable {
             ObservableList<Expenses> allExpenses = expensesTableView.getItems();
             Expenses selectedRow = expensesTableView.getSelectionModel().getSelectedItem();
             if(selectedRow != null) {
-                dashboard.getExpensesListObj().getList().remove(selectedRow);
+                dashboard.getListOfExpenses().getList().remove(selectedRow);
                 allExpenses.remove(selectedRow);
-                hasPressedDeleteButton = true;
             }
 
         });

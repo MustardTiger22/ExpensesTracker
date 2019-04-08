@@ -8,12 +8,20 @@ public class Dashboard {
     private Calendar cal = Calendar.getInstance();
     private String formattedDateString = cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH) + " " + cal.get(Calendar.YEAR);
     //There is the expensesList initialization
-    private ExpensesList expensesListObj = new ExpensesList();
+    private ExpensesList listOfExpenses = new ExpensesList();
+    private int originalListHash;
 
-
-    public ExpensesList getExpensesListObj(){
-        return expensesListObj;
+    public Dashboard() {
+        originalListHash = listOfExpenses.hashCode();
     }
+
+    public Integer getOriginalListHash() {
+        return originalListHash;
+    }
+
+    public ExpensesList getListOfExpenses(){
+        return listOfExpenses; }
+
     public String getFormattedDate() {
         return formattedDateString;
     }

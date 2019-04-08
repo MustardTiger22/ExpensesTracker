@@ -1,5 +1,6 @@
 package ExpensesTracker.Controllers;
 
+import Connectivity.BaseConnection;
 import ExpensesTracker.Models.Dashboard;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -17,8 +18,10 @@ import java.util.ResourceBundle;
 
 public class AddexpenseController implements Initializable {
     private final Stage thisStage;
-    private Boolean saveButtonPressed = new Boolean(false);
     private Dashboard dashboard;
+    private BaseConnection baseConnection = new BaseConnection();
+
+
     //FXML
     @FXML private Button saveBtn;
     @FXML private Button cancelBtn;
@@ -46,10 +49,6 @@ public class AddexpenseController implements Initializable {
         thisStage.showAndWait();
     }
 
-    public Boolean getSaveButtonPressed() {
-        return saveButtonPressed;
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //Sets that the amount property merely accepts numbers
@@ -66,9 +65,9 @@ public class AddexpenseController implements Initializable {
         categoryBox.setValue("Food");
 
         saveBtn.setOnAction(e -> {
-            dashboard.getExpensesListObj().addToList(date.getValue().toString(), description.getText(), categoryBox.getValue(), price.getText());
-            saveButtonPressed = true;
+            dashboard.getListOfExpenses().addToList(date.getValue().toString(), description.getText(), categoryBox.getValue(), price.getText());
             thisStage.close();
+            baseConnection.addToBase(date.getValue().toString(), categoryBox.getValue(), price.getText(), description.getText());
         });
         cancelBtn.setOnAction(e -> {
             thisStage.close();

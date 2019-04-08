@@ -1,5 +1,6 @@
 package ExpensesTracker.Controllers;
 
+import Connectivity.BaseConnection;
 import ExpensesTracker.Models.Dashboard;
 import ExpensesTracker.Models.Settings;
 import javafx.fxml.FXML;
@@ -17,15 +18,17 @@ public class ExitWindowController implements Initializable {
     private Settings settings = new Settings();
     private DashboardController dashboardController;
     private Dashboard dashboard;
+    private BaseConnection baseConnection;
     Boolean hasCloseBtnPressed = new Boolean(false);
 
     @FXML private Button doNotSaveButton;
     @FXML private Button cancelBtn;
     @FXML private Button saveAndExitBtn;
 
-    public ExitWindowController(Dashboard dashboard, DashboardController dashboardController) {
+    public ExitWindowController(Dashboard dashboard, DashboardController dashboardController, BaseConnection baseConnection) {
         this.dashboard = dashboard;
         this.dashboardController = dashboardController;
+        this.baseConnection = baseConnection;
         thisStage = new Stage();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/ExitWindowUI.fxml"));
@@ -59,9 +62,11 @@ public class ExitWindowController implements Initializable {
         });
         saveAndExitBtn.setOnAction(e -> {
             settings.saveSettings();
-            dashboard.getExpensesListObj().saveExpensesToFile();
+            dashboard.getListOfExpenses().saveExpensesToFile();
+            baseConnection.executeAddToBase();
             dashboardController.dashboardStage().close();
             thisStage.close();
+
         });
     }
 }

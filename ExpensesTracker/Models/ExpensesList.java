@@ -5,9 +5,10 @@ import javafx.collections.ObservableList;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ExpensesList implements Serializable {
-
+    private Integer originalListHash;
     private ObservableList<Expenses> expensesList = FXCollections.observableArrayList();
     public ObservableList<Expenses> getList() {
         return expensesList;
@@ -17,6 +18,7 @@ public class ExpensesList implements Serializable {
         if(IfTheFileExists()) {
             loadExpenseFromFile();
         }
+        originalListHash = expensesList.hashCode();
     }
     public ObservableList<Expenses> getExpensesList() {
         return expensesList;
@@ -30,6 +32,10 @@ public class ExpensesList implements Serializable {
         catch (NullPointerException e) {
             e.printStackTrace();
         }
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(expensesList);
     }
     public void addToList(Expenses expense) {
         try {
