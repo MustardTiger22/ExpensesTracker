@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 
-public class Expenses implements Serializable {
+public class Expenses {
+    private Integer id;
     private String date;
     private String description;
     private String category;
@@ -14,13 +15,15 @@ public class Expenses implements Serializable {
     public Expenses() {
 
     }
-    public Expenses(String date, String description, String category, String price) {
+    public Expenses(Integer id, String date, String category, String price, String description) {
+        this.id = id;
         this.price = price;
         this.description = description;
         this.category = category;
         this.date = date;
     }
 
+    public Integer getId() {return id;}
     public String getDate() {
         return date;
     }

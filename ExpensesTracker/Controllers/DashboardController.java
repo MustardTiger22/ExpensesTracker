@@ -31,7 +31,8 @@ public class DashboardController implements Initializable {
     private int month =  Calendar.getInstance().get(Calendar.MONTH);
     private int year = Calendar.getInstance().get(Calendar.YEAR);
     private final Stage thisStage;
-    private BaseConnection database;
+    //creating a database instance
+    private BaseConnection database = new BaseConnection();
 
     @FXML private Button showExpensesBoardBtn;
     @FXML private Button addExpenseBtn;
@@ -130,18 +131,21 @@ public class DashboardController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         //Loads a settings from file and sets the labels properties and piechart
+        dashboard.getListOfExpenses().setList(database.getListOfExpenses());
         setGUI(month, year);
         showExpensesBoardBtn.setOnAction(e -> {
-            ExpensesBoardController expensesBoardController = new ExpensesBoardController(dashboard);
+            ExpensesBoardController expensesBoardController = new ExpensesBoardController(dashboard, database);
             expensesBoardController.showStage();
-            if(dashboard.getOriginalListHash() != dashboard.getListOfExpenses().hashCode()) {
+            if(!dashboard.getListHash().equals(dashboard.getListOfExpenses().hashCode())) {
+                dashboard.setListHash(dashboard.getListOfExpenses().hashCode());
                 setGUI(month, year);
             }
         });
         addExpenseBtn.setOnAction(e -> {
-            AddexpenseController addexpenseController = new AddexpenseController(dashboard);
+            AddexpenseController addexpenseController = new AddexpenseController(dashboard, database);
             addexpenseController.showStage();
-            if(dashboard.getOriginalListHash() != dashboard.getListOfExpenses().hashCode()) {
+            if(!dashboard.getListHash().equals(dashboard.getListOfExpenses().hashCode())) {
+                dashboard.setListHash(dashboard.getListOfExpenses().hashCode());
                 setGUI(month, year);
             }
         });
@@ -173,19 +177,6 @@ public class DashboardController implements Initializable {
             dashboard.setFormattedDateString(month, year);
             dateValue.setText(dashboard.getFormattedDate());
             setGUI(month, year);
-        });
-
-        thisStage.setOnCloseRequest(event -> {
-            if(!dashboard.getOriginalListHash().equals(dashboard.getListOfExpenses().hashCode())) {
-                Platform.setImplicitExit(false);
-                ExitWindowController exitWindowController = new ExitWindowController(dashboard, this, database);
-                exitWindowController.showStage();
-                if (exitWindowController.hasCloseBtnPressed.equals(true)) {
-                    event.consume();
-                } else {
-                    Platform.exit();
-                }
-            }
         });
     }
 }

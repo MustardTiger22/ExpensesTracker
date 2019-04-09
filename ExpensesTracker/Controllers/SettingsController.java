@@ -41,6 +41,18 @@ public class SettingsController implements Initializable {
         }
     }
 
+    private void changeTextFieldToNumericFieldI(TextField textField){
+        textField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d{0,10}([\\.]\\d{0,4})?")) {
+                    textField.setText(oldValue);
+                }
+            }
+        });
+
+    }
+
     public void showStage(){
         thisStage.show();
     }
@@ -52,30 +64,9 @@ public class SettingsController implements Initializable {
             settings.loadSettings(username, budget, bills, income);
         }
         //Force textFields to approve only numeric values
-        budget.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!newValue.matches("\\d{0,10}([\\.]\\d{0,4})?")) {
-                    budget.setText(oldValue);
-                }
-            }
-        });
-        bills.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!newValue.matches("\\d{0,10}([\\.]\\d{0,4})?")) {
-                    bills.setText(oldValue);
-                }
-            }
-        });
-        income.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!newValue.matches("\\d{0,10}([\\.]\\d{0,4})?")) {
-                    income.setText(oldValue);
-                }
-            }
-        });
+        changeTextFieldToNumericFieldI(budget);
+        changeTextFieldToNumericFieldI(bills);
+        changeTextFieldToNumericFieldI(income);
 
         saveBtn.setOnAction(e -> {
             settings = new Settings(username.getText(), budget.getText(), bills.getText(), income.getText());

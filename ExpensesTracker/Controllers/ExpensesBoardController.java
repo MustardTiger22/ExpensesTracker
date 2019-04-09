@@ -1,5 +1,6 @@
 package ExpensesTracker.Controllers;
 
+import Connectivity.BaseConnection;
 import ExpensesTracker.Models.Dashboard;
 import ExpensesTracker.Models.Expenses;
 import javafx.collections.ObservableList;
@@ -18,6 +19,7 @@ import java.util.ResourceBundle;
 public class ExpensesBoardController implements Initializable {
     private final Stage thisStage;
     private Dashboard dashboard;
+    private BaseConnection database;
     @FXML private TableView<Expenses> expensesTableView;
     @FXML private TableColumn<Expenses, LocalDate> dateColumn;
     @FXML private TableColumn<Expenses, String> descriptionColumn;
@@ -26,8 +28,9 @@ public class ExpensesBoardController implements Initializable {
     @FXML private Button closeBtn;
     @FXML private Button deleteBtn;
 
-    public ExpensesBoardController(Dashboard dashboard) {
+    public ExpensesBoardController(Dashboard dashboard, BaseConnection database) {
         this.dashboard = dashboard;
+        this.database = database;
         thisStage = new Stage();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/ExpensesboardUI.fxml"));
@@ -65,6 +68,7 @@ public class ExpensesBoardController implements Initializable {
             ObservableList<Expenses> allExpenses = expensesTableView.getItems();
             Expenses selectedRow = expensesTableView.getSelectionModel().getSelectedItem();
             if(selectedRow != null) {
+                database.deleteFromBase(selectedRow.getId());
                 dashboard.getListOfExpenses().getList().remove(selectedRow);
                 allExpenses.remove(selectedRow);
             }

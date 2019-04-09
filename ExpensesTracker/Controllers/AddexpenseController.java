@@ -19,9 +19,7 @@ import java.util.ResourceBundle;
 public class AddexpenseController implements Initializable {
     private final Stage thisStage;
     private Dashboard dashboard;
-    private BaseConnection baseConnection = new BaseConnection();
-
-
+    private BaseConnection database;
     //FXML
     @FXML private Button saveBtn;
     @FXML private Button cancelBtn;
@@ -30,8 +28,9 @@ public class AddexpenseController implements Initializable {
     @FXML private TextArea description;
     @FXML private ChoiceBox<String> categoryBox;
 
-    public AddexpenseController(Dashboard dashboard) {
+    public AddexpenseController(Dashboard dashboard, BaseConnection database) {
         this.dashboard = dashboard;
+        this.database = database;
         thisStage = new Stage();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/AddexpenseUI.fxml"));
@@ -66,8 +65,8 @@ public class AddexpenseController implements Initializable {
 
         saveBtn.setOnAction(e -> {
             dashboard.getListOfExpenses().addToList(date.getValue().toString(), description.getText(), categoryBox.getValue(), price.getText());
+            database.addToBase(date.getValue().toString(), categoryBox.getValue(), price.getText(), description.getText());
             thisStage.close();
-            baseConnection.addToBase(date.getValue().toString(), categoryBox.getValue(), price.getText(), description.getText());
         });
         cancelBtn.setOnAction(e -> {
             thisStage.close();

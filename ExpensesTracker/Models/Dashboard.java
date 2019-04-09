@@ -9,15 +9,16 @@ public class Dashboard {
     private String formattedDateString = cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH) + " " + cal.get(Calendar.YEAR);
     //There is the expensesList initialization
     private ExpensesList listOfExpenses = new ExpensesList();
-    private int originalListHash;
+    private int listHash;
 
     public Dashboard() {
-        originalListHash = listOfExpenses.hashCode();
+        listHash = listOfExpenses.hashCode();
     }
 
-    public Integer getOriginalListHash() {
-        return originalListHash;
+    public Integer getListHash() {
+        return listHash;
     }
+    public void setListHash(int hash) { listHash = hash;}
 
     public ExpensesList getListOfExpenses(){
         return listOfExpenses; }
