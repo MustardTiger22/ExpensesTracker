@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 public class Expenses {
     private Integer id;
+    private Integer userId;
     private String date;
     private String description;
     private String category;
@@ -15,8 +16,9 @@ public class Expenses {
     public Expenses() {
 
     }
-    public Expenses(Integer id, String date, String category, String price, String description) {
+    public Expenses(Integer id, Integer userId, String date, String category, String price, String description) {
         this.id = id;
+        this.userId = userId;
         this.price = price;
         this.description = description;
         this.category = category;

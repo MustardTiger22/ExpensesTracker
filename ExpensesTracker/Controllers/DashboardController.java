@@ -2,11 +2,10 @@ package ExpensesTracker.Controllers;
 
 import Connectivity.BaseConnection;
 import ExpensesTracker.Models.Dashboard;
-import ExpensesTracker.Models.Settings;
-import javafx.application.Platform;
+import ExpensesTracker.Models.Users;
+import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,7 +25,7 @@ import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
     private Dashboard dashboard = new Dashboard();
-    private Settings userSettings;
+    private Users user;
     //Sets current date
     private int month =  Calendar.getInstance().get(Calendar.MONTH);
     private int year = Calendar.getInstance().get(Calendar.YEAR);
@@ -51,7 +50,8 @@ public class DashboardController implements Initializable {
     @FXML private Label accounts;
     @FXML private Label balance;
 
-    public DashboardController() {
+    public DashboardController(Users user) {
+        this.user = user;
         thisStage = new Stage();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/DashboardUI.fxml"));
@@ -81,21 +81,19 @@ public class DashboardController implements Initializable {
         return year;
     }
 
-    public void setGUI(int month, int year) {
-        dateValue.setText(dashboard.getFormattedDate());
-        if(userSettings.ifTheFileExists()) {
-            userSettings = new Settings();
-            userSettings.loadSettings(username, budget, bills, income);
-            setRecapPieChart(getMonth(), getYear());
-            setExpensesLabel(getMonth(), getYear());
-            setBalance(getMonth(), getYear());
-            setCategoryPieChart(getMonth(), getYear());
-        }
+    private void setGUI(int month, int year) {
+//        dateValue.setText(dashboard.getFormattedDate());
+//        userUsers = new Users();
+//        userUsers.loadSettings(username, budget, bills, income);
+//        setRecapPieChart(getMonth(), getYear());
+//        setExpensesLabel(getMonth(), getYear());
+//        setBalance(getMonth(), getYear());
+//        setCategoryPieChart(getMonth(), getYear());
     }
-    public void setExpensesLabel(int month, int year) {
+    private void setExpensesLabel(int month, int year) {
         expenses.setText(dashboard.getListOfExpenses().getSumOfExpensesInGivenMonthAndYear(month, year).toString());
     }
-    public void setRecapPieChart(int month, int year) {
+    private void setRecapPieChart(int month, int year) {
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(
                         new PieChart.Data("Expenses", dashboard.getListOfExpenses().getSumOfExpensesInGivenMonthAndYear(month, year)),
@@ -104,7 +102,7 @@ public class DashboardController implements Initializable {
                         new PieChart.Data("Bills", Double.parseDouble(bills.getText())));
         recapPieChart.setData(pieChartData);
     }
-    public void setCategoryPieChart(int month, int year) {
+    private void setCategoryPieChart(int month, int year) {
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
                 new PieChart.Data("Food", dashboard.getListOfExpenses().getSumOfTheParticularCategoryInGivenMonthAndYear("Food", month, year)),
                 new PieChart.Data("Clothes", dashboard.getListOfExpenses().getSumOfTheParticularCategoryInGivenMonthAndYear("Clothes", month, year)),
@@ -114,9 +112,9 @@ public class DashboardController implements Initializable {
                 new PieChart.Data("Other", dashboard.getListOfExpenses().getSumOfTheParticularCategoryInGivenMonthAndYear("Other", month, year)));
         categoryPieChart.setData(pieChartData);
     }
-    public void setBalance(int month, int year) {
+    private void setBalance(int month, int year) {
             //computedBalance = Budget - bills - expenses
-            Double computedBalance = Double.parseDouble(userSettings.getBudget()) - dashboard.getListOfExpenses().getSumOfExpensesInGivenMonthAndYear(month, year) - Double.parseDouble(userSettings.getBills());
+            Double computedBalance = Double.parseDouble(user.getBudget()) - dashboard.getListOfExpenses().getSumOfExpensesInGivenMonthAndYear(month, year) - Double.parseDouble(user.getBills());
             balance.setText(computedBalance.toString());
             if(computedBalance > 0) {
                 balance.setTextFill(Color.web("#2eb82e"));

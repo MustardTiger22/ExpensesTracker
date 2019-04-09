@@ -16,7 +16,6 @@ public class ExpensesList{
 
     public ExpensesList() {
         expensesList.setAll(test.getListOfExpenses());
-        originalListHash = expensesList.hashCode();
     }
 
 
@@ -26,7 +25,7 @@ public class ExpensesList{
 
     public void addToList(String datePicker, String description, String category, String price) {
         try {
-            expensesList.add(new Expenses(1, datePicker, category, price , description));
+            expensesList.add(new Expenses(1,1, datePicker, category, price , description));
         }
         catch (NullPointerException e) {
             e.printStackTrace();
@@ -36,23 +35,6 @@ public class ExpensesList{
     public void setList(ObservableList<Expenses> newList){
         expensesList = newList;
     }
-
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(expensesList);
-    }
-
-    public void addToList(Expenses expense) {
-        try {
-            expensesList.add(expense);
-        }
-        catch (NullPointerException e) {
-            e.printStackTrace();
-        }
-    }
-
-
 
     //return a sum of price every item in the expenses collection
     public Double getSumOfExpensesInGivenMonthAndYear(int month, int year) {

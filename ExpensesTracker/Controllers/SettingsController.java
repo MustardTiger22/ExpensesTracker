@@ -1,7 +1,7 @@
 package ExpensesTracker.Controllers;
 
 import ExpensesTracker.Models.Dashboard;
-import ExpensesTracker.Models.Settings;
+import ExpensesTracker.Models.Users;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 
 public class SettingsController implements Initializable {
     private final Stage thisStage;
-    private Settings settings;
+    private Users users;
     private Dashboard dashboard;
     @FXML private TextField username;
     @FXML private TextField budget;
@@ -34,12 +34,14 @@ public class SettingsController implements Initializable {
             loader.setController(this);
             thisStage.setScene(new Scene(loader.load()));
             thisStage.resizableProperty().setValue(false);
-            thisStage.setTitle("Settings");
+            thisStage.setTitle("Users");
         }
         catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
 
     private void changeTextFieldToNumericFieldI(TextField textField){
         textField.textProperty().addListener(new ChangeListener<String>() {
@@ -59,25 +61,19 @@ public class SettingsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if(settings.ifTheFileExists()) {
-            settings = new Settings();
-            settings.loadSettings(username, budget, bills, income);
-        }
         //Force textFields to approve only numeric values
         changeTextFieldToNumericFieldI(budget);
         changeTextFieldToNumericFieldI(bills);
         changeTextFieldToNumericFieldI(income);
 
         saveBtn.setOnAction(e -> {
-            settings = new Settings(username.getText(), budget.getText(), bills.getText(), income.getText());
-            settings.saveSettings();
-            DashboardController dashboardController = new DashboardController();
-            dashboardController.showStage();
+//            DashboardController dashboardController = new DashboardController();
+//            dashboardController.showStage();
             thisStage.close();
         });
         closeBtn.setOnAction(e -> {
-            DashboardController dashboardController = new DashboardController();
-            dashboardController.showStage();
+//            DashboardController dashboardController = new DashboardController();
+//            dashboardController.showStage();
             thisStage.close();
         });
     }

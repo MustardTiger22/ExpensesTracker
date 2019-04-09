@@ -1,13 +1,13 @@
 package ExpensesTracker;
 
-import ExpensesTracker.Controllers.DashboardController;
+import ExpensesTracker.Controllers.StartpageController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 public class Main extends Application {
-    private DashboardController dashboardController = new DashboardController();
+    private StartpageController startpageController = new StartpageController();
     @Override
     public void start(Stage primaryStage) throws Exception{
-        dashboardController.showStage();
+        startpageController.showStage();
     }
 
     public static void main(String[] args) {
