@@ -24,8 +24,8 @@ import java.util.ResourceBundle;
 
 
 public class DashboardController implements Initializable {
-    private Dashboard dashboard = new Dashboard();
     private Users user;
+    private Dashboard dashboard;
     //Sets current date
     private int month =  Calendar.getInstance().get(Calendar.MONTH);
     private int year = Calendar.getInstance().get(Calendar.YEAR);
@@ -52,6 +52,7 @@ public class DashboardController implements Initializable {
 
     public DashboardController(Users user) {
         this.user = user;
+        dashboard = new Dashboard(user);
         thisStage = new Stage();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/DashboardUI.fxml"));
@@ -64,9 +65,6 @@ public class DashboardController implements Initializable {
             e.printStackTrace();
         }
     }
-    public Stage dashboardStage(){
-        return thisStage;
-    }
 
     public void showStage(){
         thisStage.show();
@@ -74,21 +72,20 @@ public class DashboardController implements Initializable {
         tabPane.lookup(".tab-pane .tab-header-area .tab-header-background").setStyle("-fx-background-color: #00796B;");
     }
 
-    public int getMonth() {
-        return month;
-    }
-    public int getYear() {
-        return year;
+    private void setGUI(int month, int year) {
+        dateValue.setText(dashboard.getFormattedDate());
+        loadSettings();
+        setRecapPieChart(month, year);
+        setExpensesLabel(month, year);
+        setBalance(month, year);
+        setCategoryPieChart(month, year);
     }
 
-    private void setGUI(int month, int year) {
-//        dateValue.setText(dashboard.getFormattedDate());
-//        userUsers = new Users();
-//        userUsers.loadSettings(username, budget, bills, income);
-//        setRecapPieChart(getMonth(), getYear());
-//        setExpensesLabel(getMonth(), getYear());
-//        setBalance(getMonth(), getYear());
-//        setCategoryPieChart(getMonth(), getYear());
+    public void loadSettings() {
+        username.setText(user.getUsername());
+        budget.setText(user.getBudget());
+        bills.setText(user.getBills());
+        income.setText(user.getIncome());
     }
     private void setExpensesLabel(int month, int year) {
         expenses.setText(dashboard.getListOfExpenses().getSumOfExpensesInGivenMonthAndYear(month, year).toString());
@@ -127,25 +124,21 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        //Loads a settings from file and sets the labels properties and piechart
-        dashboard.getListOfExpenses().setList(database.getListOfExpenses());
         setGUI(month, year);
+
+
         showExpensesBoardBtn.setOnAction(e -> {
             ExpensesBoardController expensesBoardController = new ExpensesBoardController(dashboard, database);
             expensesBoardController.showStage();
-            if(!dashboard.getListHash().equals(dashboard.getListOfExpenses().hashCode())) {
-                dashboard.setListHash(dashboard.getListOfExpenses().hashCode());
+//            if(!dashboard.getListHash().equals(dashboard.getListOfExpenses().hashCode())) {
+//                dashboard.setListHash(dashboard.getListOfExpenses().hashCode());
                 setGUI(month, year);
-            }
+//            }
         });
         addExpenseBtn.setOnAction(e -> {
             AddexpenseController addexpenseController = new AddexpenseController(dashboard, database);
             addexpenseController.showStage();
-            if(!dashboard.getListHash().equals(dashboard.getListOfExpenses().hashCode())) {
-                dashboard.setListHash(dashboard.getListOfExpenses().hashCode());
                 setGUI(month, year);
-            }
         });
         settingsBtn.setOnAction(e -> {
             SettingsController settingsController = new SettingsController(dashboard);

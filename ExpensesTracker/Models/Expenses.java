@@ -26,6 +26,7 @@ public class Expenses {
     }
 
     public Integer getId() {return id;}
+    public Integer getUserId() {return userId;}
     public String getDate() {
         return date;
     }

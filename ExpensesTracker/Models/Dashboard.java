@@ -1,28 +1,24 @@
 package ExpensesTracker.Models;
-
-
 import java.util.Calendar;
 import java.util.Locale;
 
 public class Dashboard {
+    //There is the expensesList initialization
+    private ExpensesList listOfExpenses;
+    private Users user;
     private Calendar cal = Calendar.getInstance();
     private String formattedDateString = cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH) + " " + cal.get(Calendar.YEAR);
-    //There is the expensesList initialization
-    private ExpensesList listOfExpenses = new ExpensesList();
-    private int listHash;
 
-    public Dashboard() {
-        listHash = listOfExpenses.hashCode();
+    public Dashboard(Users user) {
+        this.user = user;
+        listOfExpenses = new ExpensesList(user);
     }
 
-    public Integer getListHash() {
-        return listHash;
+    public Users getUser(){
+        return user;
     }
-    public void setListHash(int hash) { listHash = hash;}
-
     public ExpensesList getListOfExpenses(){
         return listOfExpenses; }
-
     public String getFormattedDate() {
         return formattedDateString;
     }

@@ -1,8 +1,12 @@
 package ExpensesTracker.Models;
 
 import Connectivity.BaseConnection;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.collections.ObservableList;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class Users {
     private Integer id;
@@ -10,7 +14,7 @@ public class Users {
     private String budget;
     private String bills;
     private String income;
-    private BaseConnection database = new BaseConnection();
+
 
     public Users(Integer id, String username, String budget, String bills, String income) {
         this.id = id;
@@ -41,17 +45,4 @@ public class Users {
 
 
 
-    public void loadSettings(TextField username, TextField budget, TextField bills, TextField income) {
-        username.setText(getUsername());
-        budget.setText(getBudget());
-        bills.setText(getBills());
-        income.setText(getIncome());
-    }
-
-    public void loadSettings(Label username, Label budget, Label bills, Label income) {
-        username.setText(getUsername());
-        budget.setText(getBudget());
-        bills.setText(getBills());
-        income.setText(getIncome());
-    }
 }

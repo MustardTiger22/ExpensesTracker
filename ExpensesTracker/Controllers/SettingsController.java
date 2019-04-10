@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 
 public class SettingsController implements Initializable {
     private final Stage thisStage;
-    private Users users;
+    private Users user;
     private Dashboard dashboard;
     @FXML private TextField username;
     @FXML private TextField budget;
@@ -28,6 +28,7 @@ public class SettingsController implements Initializable {
 
     public SettingsController(Dashboard dashboard) {
         this.dashboard = dashboard;
+        this.user = dashboard.getUser();
         thisStage = new Stage();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/SettingsUI.fxml"));
@@ -41,7 +42,12 @@ public class SettingsController implements Initializable {
         }
     }
 
-
+    public void loadUserSettings() {
+        username.setText(user.getUsername());
+        budget.setText(user.getBudget());
+        bills.setText(user.getBills());
+        income.setText(user.getIncome());
+    }
 
     private void changeTextFieldToNumericFieldI(TextField textField){
         textField.textProperty().addListener(new ChangeListener<String>() {
@@ -66,14 +72,16 @@ public class SettingsController implements Initializable {
         changeTextFieldToNumericFieldI(bills);
         changeTextFieldToNumericFieldI(income);
 
+        loadUserSettings();
+
         saveBtn.setOnAction(e -> {
-//            DashboardController dashboardController = new DashboardController();
-//            dashboardController.showStage();
+            DashboardController dashboardController = new DashboardController(user);
+            dashboardController.showStage();
             thisStage.close();
         });
         closeBtn.setOnAction(e -> {
-//            DashboardController dashboardController = new DashboardController();
-//            dashboardController.showStage();
+            DashboardController dashboardController = new DashboardController(user);
+            dashboardController.showStage();
             thisStage.close();
         });
     }

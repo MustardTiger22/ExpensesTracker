@@ -68,8 +68,7 @@ public class ExpensesBoardController implements Initializable {
             ObservableList<Expenses> allExpenses = expensesTableView.getItems();
             Expenses selectedRow = expensesTableView.getSelectionModel().getSelectedItem();
             if(selectedRow != null) {
-                database.deleteFromBase(selectedRow.getId());
-                dashboard.getListOfExpenses().getList().remove(selectedRow);
+                dashboard.getListOfExpenses().deleteFromBaseAndList(selectedRow);
                 allExpenses.remove(selectedRow);
             }
 

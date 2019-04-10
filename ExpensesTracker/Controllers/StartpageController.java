@@ -2,6 +2,7 @@ package ExpensesTracker.Controllers;
 
 import ExpensesTracker.Models.Startpage;
 import ExpensesTracker.Models.Users;
+import ExpensesTracker.Models.UsersList;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,10 +18,9 @@ import java.util.ResourceBundle;
 public class StartpageController implements Initializable{
     private final Stage thisStage;
     Startpage startpage = new Startpage();
-
+    UsersList usersList = new UsersList();
     @FXML private Button chooseBtn;
     @FXML private Button closeBtn;
-    @FXML private Button refreshBtn;
     @FXML private Button deleteBtn;
     @FXML private Button addNewUserBtn;
     @FXML private TextField username;
@@ -66,7 +66,7 @@ public class StartpageController implements Initializable{
 
 
         //Table properties
-        tableView.setItems(startpage.getUsersList());
+        tableView.setItems(usersList.getList());
         tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
 
@@ -82,20 +82,21 @@ public class StartpageController implements Initializable{
             }
 
         });
-        closeBtn.setOnAction(e -> {
-
-        });
-        refreshBtn.setOnAction(e -> {
-
-        });
         deleteBtn.setOnAction(e -> {
-
+            ObservableList<Users> allExpenses = tableView.getItems();
+            Users selectedUser = tableView.getSelectionModel().getSelectedItem();
+            if(selectedUser != null) {
+                usersList.deleteUser(selectedUser);
+            }
         });
         addNewUserBtn.setOnAction(e -> {
-            startpage.AddUser(username.getText(), income.getText(), budget.getText(), bills.getText());
+            usersList.AddUser(username.getText(), income.getText(), budget.getText(), bills.getText());
             //Switching tab pane to pane with users
             tabPane.getSelectionModel().select(usersTabPane);
-            tableView.refresh();
+            //tableView.refresh();
+        });
+        closeBtn.setOnAction(e -> {
+            thisStage.close();
         });
 
     }
