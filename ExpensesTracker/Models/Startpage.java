@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -14,6 +15,15 @@ public class Startpage {
     private ObservableList<Users> usersList = FXCollections.observableArrayList();
 
     public Startpage(){
+        getUsersFromDatabase();
+    }
+
+    public ObservableList<Users> getUsersList() {
+        return  usersList;
+    }
+
+
+    public void getUsersFromDatabase(){
         try{
             Statement statement = con.createStatement();
             String sql = "SELECT * FROM users";
@@ -27,13 +37,24 @@ public class Startpage {
         }
     }
 
-    public ObservableList<Users> getUsersList() {
-        return  usersList;
-    }
+    public void AddUser(String username, String income, String budget, String bills){
+        try{
+            String query = "INSERT INTO users(username, income, budget, bills) VALUES('"+username+"','"+income+"','"+budget+"','"+bills+"') ";
+            PreparedStatement statement = con.prepareStatement(query, Statement. RETURN_GENERATED_KEYS);
+            //To add an object to list I receive id which is autoincremented. That's important to keep a consistency of data in the list and the database.
+            statement.executeUpdate();
+            ResultSet rs = statement.getGeneratedKeys();
+            //Here I get the id
+            if(rs.next()) {
+                //A ResultSet cursor is initially positioned before the first row;
+                usersList.add(new Users(rs.getInt(1), username, income, budget, bills));
+                System.out.println(rs.getInt(1));
+            }
 
-    public void AddUser(String username, String income, String budget, String bills) throws Exception{
-        Statement statement = con.createStatement();
-        String sql = "INSERT INTO users(username, income, budget, bills) VALUES('"+username+"','"+income+"','"+budget+"','"+bills+"')";
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

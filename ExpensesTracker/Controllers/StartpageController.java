@@ -23,10 +23,16 @@ public class StartpageController implements Initializable{
     @FXML private Button refreshBtn;
     @FXML private Button deleteBtn;
     @FXML private Button addNewUserBtn;
-    @FXML private TableView tableView;
+    @FXML private TextField username;
+    @FXML private TextField income;
+    @FXML private TextField budget;
+    @FXML private TextField bills;
+    @FXML private Tab usersTabPane;
+    @FXML private TabPane tabPane;
+    @FXML private TableView<Users> tableView;
     @FXML private TableColumn<Users, String> usernameCol;
-    @FXML private TableColumn<Users, String> incomeCol;
-    @FXML private TableColumn<Users, String> budgetCol;
+    @FXML private TableColumn<Users, Double> incomeCol;
+    @FXML private TableColumn<Users, Double> budgetCol;
     @FXML private TableColumn<Users, Double> billsCol;
 
 
@@ -52,9 +58,11 @@ public class StartpageController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         usernameCol.setCellValueFactory(new PropertyValueFactory<Users, String>("username"));
-        incomeCol.setCellValueFactory(new PropertyValueFactory<Users, String>("income"));
-        budgetCol.setCellValueFactory(new PropertyValueFactory<Users, String>("budget"));
+        incomeCol.setCellValueFactory(new PropertyValueFactory<Users, Double>("income"));
+        budgetCol.setCellValueFactory(new PropertyValueFactory<Users, Double>("budget"));
         billsCol.setCellValueFactory(new PropertyValueFactory<Users, Double>("bills"));
+
+
 
 
         //Table properties
@@ -66,7 +74,7 @@ public class StartpageController implements Initializable{
 
         chooseBtn.setOnAction(e -> {
             ObservableList<Users> allExpenses = tableView.getItems();
-            Users selectedUser = (Users)tableView.getSelectionModel().getSelectedItem();
+            Users selectedUser = tableView.getSelectionModel().getSelectedItem();
             if(selectedUser != null) {
                 DashboardController dashboardController = new DashboardController(selectedUser);
                 dashboardController.showStage();
@@ -84,7 +92,10 @@ public class StartpageController implements Initializable{
 
         });
         addNewUserBtn.setOnAction(e -> {
-
+            startpage.AddUser(username.getText(), income.getText(), budget.getText(), bills.getText());
+            //Switching tab pane to pane with users
+            tabPane.getSelectionModel().select(usersTabPane);
+            tableView.refresh();
         });
 
     }

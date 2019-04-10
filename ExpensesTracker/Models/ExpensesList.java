@@ -3,13 +3,8 @@ package ExpensesTracker.Models;
 import Connectivity.BaseConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 public class ExpensesList{
-    private Integer originalListHash;
     private ObservableList<Expenses> expensesList = FXCollections.observableArrayList();
     private BaseConnection test = new BaseConnection();
 
@@ -23,13 +18,8 @@ public class ExpensesList{
         return expensesList;
     }
 
-    public void addToList(String datePicker, String description, String category, String price) {
-        try {
-            expensesList.add(new Expenses(1,1, datePicker, category, price , description));
-        }
-        catch (NullPointerException e) {
-            e.printStackTrace();
-        }
+    public void addToList(String datePicker, String description, String category, String price) throws NullPointerException{
+        expensesList.add(new Expenses(1,1, datePicker, category, price , description));
     }
 
     public void setList(ObservableList<Expenses> newList){

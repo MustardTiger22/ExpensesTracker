@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0" prefWidth="480.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0" prefWidth="480.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
   <tabs>
-    <Tab text="Users">
+    <Tab fx:id="usersTabPane" text="Users">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="459.0" prefWidth="480.0">
                <children>
@@ -22,7 +22,7 @@
                       <TableColumn fx:id="usernameCol" prefWidth="120.0" text="username" />
                       <TableColumn fx:id="incomeCol" prefWidth="120.0" text="income" />
                         <TableColumn fx:id="budgetCol" prefWidth="120.0" text="budget" />
-                        <TableColumn fx:id="billCol" prefWidth="120.0" text="bills" />
+                        <TableColumn fx:id="billsCol" prefWidth="120.0" text="bills" />
                     </columns>
                   </TableView>
                   <Button fx:id="chooseBtn" layoutX="14.0" layoutY="396.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" text="Choose">
@@ -31,11 +31,6 @@
                      </font>
                   </Button>
                   <Button fx:id="deleteBtn" layoutX="129.0" layoutY="396.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" text="Delete">
-                     <font>
-                        <Font name="Lato Regular" size="15.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="refreshBtn" layoutX="248.0" layoutY="396.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" text="Refresh">
                      <font>
                         <Font name="Lato Regular" size="15.0" />
                      </font>
@@ -59,25 +54,25 @@
                               <Font name="Lato Regular" size="26.0" />
                            </font>
                         </Label>
-                        <TextField />
+                        <TextField fx:id="username" />
                         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="250.0" text="Income">
                            <font>
                               <Font name="Lato Regular" size="26.0" />
                            </font>
                         </Label>
-                        <TextField />
+                        <TextField fx:id="income" />
                         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="250.0" text="Budget">
                            <font>
                               <Font name="Lato Regular" size="26.0" />
                            </font>
                         </Label>
-                        <TextField />
+                        <TextField fx:id="budget" />
                         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="250.0" text="Bills">
                            <font>
                               <Font name="Lato Regular" size="26.0" />
                            </font>
                         </Label>
-                        <TextField />
+                        <TextField fx:id="bills" />
                      </children>
                   </VBox>
                   <Button fx:id="addNewUserBtn" layoutX="175.0" layoutY="360.0" mnemonicParsing="false" text="Add new user">
