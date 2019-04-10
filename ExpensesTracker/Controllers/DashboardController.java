@@ -66,8 +66,6 @@ public class DashboardController implements Initializable {
 
     public void showStage(){
         thisStage.show();
-        //Sets header tabpane background color
-        tabPane.lookup(".tab-pane .tab-header-area .tab-header-background").setStyle("-fx-background-color: #00796B;");
     }
 
     private void setGUI(int month, int year) {

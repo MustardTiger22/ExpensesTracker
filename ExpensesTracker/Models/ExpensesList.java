@@ -43,7 +43,7 @@ public class ExpensesList{
         try {
             String query = "INSERT INTO expensesboard(date, category, price, description, userId) VALUES ('" + date + "','" + category + "','" + price + "','" + description + "','"+ user.getId() +"');";
             //To add an object to a list I receive the id which is auto_increment. That's important to keep a consistency of data in the list and the database.
-            PreparedStatement statement = con.prepareStatement(query, Statement. RETURN_GENERATED_KEYS);
+            PreparedStatement statement = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             statement.executeUpdate();
             //Here I get the id
             ResultSet rs = statement.getGeneratedKeys();

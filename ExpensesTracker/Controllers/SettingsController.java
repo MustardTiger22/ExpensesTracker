@@ -1,10 +1,7 @@
 package ExpensesTracker.Controllers;
 
-import ExpensesTracker.Models.Dashboard;
 import ExpensesTracker.Models.Users;
 import ExpensesTracker.Models.UsersList;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;

@@ -3,7 +3,6 @@ package ExpensesTracker.Models;
 import Connectivity.BaseConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,7 +22,7 @@ public class UsersList {
     }
 
     //DATABASE QUERIES AND LIST MODIFICATION
-    public void getUsersFromDatabase(){
+    private void getUsersFromDatabase(){
         try{
             Statement statement = con.createStatement();
             String sql = "SELECT * FROM ExpensesApp.users";
@@ -41,15 +40,13 @@ public class UsersList {
         try{
             String query = "INSERT INTO ExpensesApp.users(username, income, budget, bills) VALUES('"+username+"','"+income+"','"+budget+"','"+bills+"') ";
             //To add an object to a list I receive the id which is auto_increment. That's important to keep a consistency of data in the list and the database.
-            PreparedStatement statement = con.prepareStatement(query, Statement. RETURN_GENERATED_KEYS);
+            PreparedStatement statement = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             statement.executeUpdate();
             //Here I get the id
             ResultSet rs = statement.getGeneratedKeys();
             //A ResultSet cursor is initially positioned before the first row;
             if(rs.next()) {
-
                 usersList.add(new Users(rs.getInt(1), username, income, budget, bills));
-                System.out.println(rs.getInt(1));
             }
 
         }

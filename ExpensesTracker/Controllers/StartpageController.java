@@ -2,7 +2,6 @@ package ExpensesTracker.Controllers;
 
 import ExpensesTracker.Models.Users;
 import ExpensesTracker.Models.UsersList;
-import ExpensesTracker.Controllers.NumericFields;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
