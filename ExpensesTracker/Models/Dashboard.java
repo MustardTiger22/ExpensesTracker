@@ -13,10 +13,6 @@ public class Dashboard {
         this.user = user;
         listOfExpenses = new ExpensesList(user);
     }
-
-    public Users getUser(){
-        return user;
-    }
     public ExpensesList getListOfExpenses(){
         return listOfExpenses; }
     public String getFormattedDate() {

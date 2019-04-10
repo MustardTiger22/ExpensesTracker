@@ -1,13 +1,5 @@
 package ExpensesTracker.Models;
 
-import Connectivity.BaseConnection;
-import javafx.collections.ObservableList;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-
 public class Users {
     private Integer id;
     private String username;
@@ -41,6 +33,19 @@ public class Users {
     }
     public String getIncome() {
         return income;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    public void setBudget(String budget) {
+        this.budget = budget;
+    }
+    public void setIncome(String income) {
+        this.income = income;
+    }
+    public void setBills(String bills) {
+        this.bills = bills;
     }
 
 

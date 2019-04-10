@@ -1,8 +1,8 @@
 package ExpensesTracker.Controllers;
 
-import ExpensesTracker.Models.Startpage;
 import ExpensesTracker.Models.Users;
 import ExpensesTracker.Models.UsersList;
+import ExpensesTracker.Controllers.NumericFields;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 
 public class StartpageController implements Initializable{
     private final Stage thisStage;
-    Startpage startpage = new Startpage();
+    private NumericFields numericFields;
     UsersList usersList = new UsersList();
     @FXML private Button chooseBtn;
     @FXML private Button closeBtn;
@@ -50,7 +50,6 @@ public class StartpageController implements Initializable{
         }
     }
 
-
     public void showStage(){
         thisStage.show();
     }
@@ -62,7 +61,9 @@ public class StartpageController implements Initializable{
         budgetCol.setCellValueFactory(new PropertyValueFactory<Users, Double>("budget"));
         billsCol.setCellValueFactory(new PropertyValueFactory<Users, Double>("bills"));
 
-
+        numericFields.changeTextFieldToNumericField(income);
+        numericFields.changeTextFieldToNumericField(budget);
+        numericFields.changeTextFieldToNumericField(bills);
 
 
         //Table properties
@@ -73,7 +74,6 @@ public class StartpageController implements Initializable{
 
 
         chooseBtn.setOnAction(e -> {
-            ObservableList<Users> allExpenses = tableView.getItems();
             Users selectedUser = tableView.getSelectionModel().getSelectedItem();
             if(selectedUser != null) {
                 DashboardController dashboardController = new DashboardController(selectedUser);
@@ -87,6 +87,7 @@ public class StartpageController implements Initializable{
             Users selectedUser = tableView.getSelectionModel().getSelectedItem();
             if(selectedUser != null) {
                 usersList.deleteUser(selectedUser);
+                allExpenses.remove(selectedUser);
             }
         });
         addNewUserBtn.setOnAction(e -> {

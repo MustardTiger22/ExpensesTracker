@@ -1,9 +1,7 @@
 package ExpensesTracker.Controllers;
 
-import Connectivity.BaseConnection;
 import ExpensesTracker.Models.Dashboard;
 import ExpensesTracker.Models.Users;
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -31,13 +29,13 @@ public class DashboardController implements Initializable {
     private int year = Calendar.getInstance().get(Calendar.YEAR);
     private final Stage thisStage;
     //creating a database instance
-    private BaseConnection database = new BaseConnection();
 
     @FXML private Button showExpensesBoardBtn;
     @FXML private Button addExpenseBtn;
     @FXML private Button settingsBtn;
     @FXML private Button nextMonthBtn;
     @FXML private Button previousMonthBtn;
+    @FXML private Button changeUserBtn;
     @FXML private TabPane tabPane;
     @FXML private PieChart recapPieChart;
     @FXML private PieChart categoryPieChart;
@@ -128,21 +126,24 @@ public class DashboardController implements Initializable {
 
 
         showExpensesBoardBtn.setOnAction(e -> {
-            ExpensesBoardController expensesBoardController = new ExpensesBoardController(dashboard, database);
+            ExpensesBoardController expensesBoardController = new ExpensesBoardController(dashboard);
             expensesBoardController.showStage();
-//            if(!dashboard.getListHash().equals(dashboard.getListOfExpenses().hashCode())) {
-//                dashboard.setListHash(dashboard.getListOfExpenses().hashCode());
                 setGUI(month, year);
-//            }
         });
         addExpenseBtn.setOnAction(e -> {
-            AddexpenseController addexpenseController = new AddexpenseController(dashboard, database);
+            AddexpenseController addexpenseController = new AddexpenseController(dashboard);
             addexpenseController.showStage();
                 setGUI(month, year);
         });
         settingsBtn.setOnAction(e -> {
-            SettingsController settingsController = new SettingsController(dashboard);
+            SettingsController settingsController = new SettingsController(user);
             settingsController.showStage();
+            thisStage.close();
+        });
+
+        changeUserBtn.setOnAction(e-> {
+            StartpageController startpageController = new StartpageController();
+            startpageController.showStage();
             thisStage.close();
         });
 

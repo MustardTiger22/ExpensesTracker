@@ -2,6 +2,7 @@ package ExpensesTracker.Controllers;
 
 import ExpensesTracker.Models.Dashboard;
 import ExpensesTracker.Models.Users;
+import ExpensesTracker.Models.UsersList;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -15,10 +16,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SettingsController implements Initializable {
+public class SettingsController  implements Initializable {
     private final Stage thisStage;
+    private NumericFields numericFields;
     private Users user;
-    private Dashboard dashboard;
+    private UsersList usersList = new UsersList();
     @FXML private TextField username;
     @FXML private TextField budget;
     @FXML private TextField bills;
@@ -26,9 +28,8 @@ public class SettingsController implements Initializable {
     @FXML private Button saveBtn;
     @FXML private Button closeBtn;
 
-    public SettingsController(Dashboard dashboard) {
-        this.dashboard = dashboard;
-        this.user = dashboard.getUser();
+    public SettingsController(Users user) {
+        this.user = user;
         thisStage = new Stage();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/SettingsUI.fxml"));
@@ -49,17 +50,7 @@ public class SettingsController implements Initializable {
         income.setText(user.getIncome());
     }
 
-    private void changeTextFieldToNumericFieldI(TextField textField){
-        textField.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!newValue.matches("\\d{0,10}([\\.]\\d{0,4})?")) {
-                    textField.setText(oldValue);
-                }
-            }
-        });
 
-    }
 
     public void showStage(){
         thisStage.show();
@@ -68,13 +59,14 @@ public class SettingsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //Force textFields to approve only numeric values
-        changeTextFieldToNumericFieldI(budget);
-        changeTextFieldToNumericFieldI(bills);
-        changeTextFieldToNumericFieldI(income);
+        numericFields.changeTextFieldToNumericField(budget);
+        numericFields.changeTextFieldToNumericField(bills);
+        numericFields.changeTextFieldToNumericField(income);
 
         loadUserSettings();
 
         saveBtn.setOnAction(e -> {
+            usersList.updateUser(user, username.getText(), income.getText(), budget.getText(), bills.getText());
             DashboardController dashboardController = new DashboardController(user);
             dashboardController.showStage();
             thisStage.close();
