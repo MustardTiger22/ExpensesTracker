@@ -1,6 +1,5 @@
 package ExpensesTracker.Models;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
 
@@ -11,7 +10,6 @@ public class Expenses {
     private String description;
     private String category;
     private String price;
-    private LocalDate dateObj;
 
     public Expenses() {
 

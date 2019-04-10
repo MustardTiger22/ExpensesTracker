@@ -1,3 +1,11 @@
+*{
+    -fx-font-family: "lato", "Sans-serif";
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: #00796B;
+}
+
 .button {
     -fx-background-color: #33AC71;
     -fx-background-radius: 22;

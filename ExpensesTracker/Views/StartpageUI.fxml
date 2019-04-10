@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0" prefWidth="480.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0" prefWidth="480.0" stylesheets="@../../Styles.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
   <tabs>
     <Tab fx:id="usersTabPane" text="Users">
       <content>
@@ -19,18 +19,18 @@
                <children>
                   <TableView fx:id="tableView" prefHeight="370.0" prefWidth="480.0">
                     <columns>
-                      <TableColumn fx:id="usernameCol" prefWidth="120.0" text="username" />
-                      <TableColumn fx:id="incomeCol" prefWidth="120.0" text="income" />
-                        <TableColumn fx:id="budgetCol" prefWidth="120.0" text="budget" />
-                        <TableColumn fx:id="billsCol" prefWidth="120.0" text="bills" />
+                      <TableColumn fx:id="usernameCol" editable="false" prefWidth="120.0" text="username" />
+                      <TableColumn fx:id="incomeCol" editable="false" prefWidth="120.0" text="income" />
+                        <TableColumn fx:id="budgetCol" editable="false" prefWidth="120.0" text="budget" />
+                        <TableColumn fx:id="billsCol" editable="false" prefWidth="120.0" text="bills" />
                     </columns>
                   </TableView>
-                  <Button fx:id="chooseBtn" layoutX="14.0" layoutY="396.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" text="Choose">
+                  <Button fx:id="chooseBtn" layoutX="14.0" layoutY="396.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="120.0" text="Choose">
                      <font>
                         <Font name="Lato Regular" size="15.0" />
                      </font>
                   </Button>
-                  <Button fx:id="deleteBtn" layoutX="129.0" layoutY="396.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" text="Delete">
+                  <Button fx:id="deleteBtn" layoutX="183.0" layoutY="396.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="114.0" text="Delete">
                      <font>
                         <Font name="Lato Regular" size="15.0" />
                      </font>
@@ -75,7 +75,7 @@
                         <TextField fx:id="bills" />
                      </children>
                   </VBox>
-                  <Button fx:id="addNewUserBtn" layoutX="175.0" layoutY="360.0" mnemonicParsing="false" text="Add new user">
+                  <Button fx:id="addNewUserBtn" layoutX="162.0" layoutY="360.0" mnemonicParsing="false" text="Add new user">
                      <font>
                         <Font name="Lato Regular" size="21.0" />
                      </font>
