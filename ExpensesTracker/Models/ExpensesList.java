@@ -45,7 +45,7 @@ public class ExpensesList{
             //To add an object to a list I receive the id which is auto_increment. That's important to keep a consistency of data in the list and the database.
             PreparedStatement statement = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             statement.executeUpdate();
-            //Here I get the id
+            //Here I get the generated Id
             ResultSet rs = statement.getGeneratedKeys();
             //A ResultSet cursor is initially positioned before the first row;
             if(rs.next()) {

@@ -70,14 +70,14 @@ public class DashboardController implements Initializable {
 
     private void setGUI(int month, int year) {
         dateValue.setText(dashboard.getFormattedDate());
-        loadSettings();
+        loadUserSettingsToLabels();
         setRecapPieChart(month, year);
         setExpensesLabel(month, year);
         setBalance(month, year);
         setCategoryPieChart(month, year);
     }
 
-    public void loadSettings() {
+    public void loadUserSettingsToLabels() {
         username.setText(user.getUsername());
         budget.setText(user.getBudget());
         bills.setText(user.getBills());

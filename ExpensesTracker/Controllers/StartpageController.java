@@ -90,10 +90,9 @@ public class StartpageController implements Initializable{
             }
         });
         addNewUserBtn.setOnAction(e -> {
-            usersList.AddUser(username.getText(), income.getText(), budget.getText(), bills.getText());
-            //Switching tab pane to pane with users
+            usersList.addUser(username.getText(), income.getText(), budget.getText(), bills.getText());
+            //Switching tab pane to a pane with users
             tabPane.getSelectionModel().select(usersTabPane);
-            //tableView.refresh();
         });
         closeBtn.setOnAction(e -> {
             thisStage.close();

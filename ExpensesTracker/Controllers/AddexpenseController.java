@@ -46,7 +46,7 @@ public class AddexpenseController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         numericFields.changeTextFieldToNumericField(price);
 
-        //Load data to categoryBox and set a default value;
+        //Load data to categoryBox and sets a default value;
         categoryBox.getItems().addAll("Food", "Clothes", "Hobby", "Transport", "Health, hygiene and chemistry", "Other");
         categoryBox.setValue("Food");
 

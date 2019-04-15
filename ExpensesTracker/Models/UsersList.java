@@ -36,7 +36,7 @@ public class UsersList {
         }
     }
 
-    public void AddUser(String username, String income, String budget, String bills){
+    public void addUser(String username, String income, String budget, String bills){
         try{
             String query = "INSERT INTO ExpensesApp.users(username, income, budget, bills) VALUES('"+username+"','"+income+"','"+budget+"','"+bills+"') ";
             //To add an object to a list I receive the id which is auto_increment. That's important to keep a consistency of data in the list and the database.
