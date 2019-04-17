@@ -66,9 +66,9 @@
             <Font name="Lato Bold" size="25.0" />
          </font>
       </Label>
-      <AnchorPane prefHeight="80.0" prefWidth="600.0" style="-fx-background-color: #00796B;" stylesheets="@../../Styles.css">
+      <AnchorPane prefHeight="80.0" prefWidth="600.0" style="-fx-background-color: #00796B;" stylesheets="@../Styles.css">
          <children>
-            <Button fx:id="addExpenseBtn" contentDisplay="CENTER" layoutX="364.0" layoutY="14.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="80.0" style="-fx-font-size: 24;" stylesheets="@../../Styles.css" text="Add">
+            <Button fx:id="addExpenseBtn" contentDisplay="CENTER" layoutX="364.0" layoutY="14.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="80.0" style="-fx-font-size: 24;" stylesheets="@../Styles.css" text="Add">
                <font>
                   <Font name="Lato Bold" size="15.0" />
                </font>
@@ -82,8 +82,8 @@
                   <Font name="Lato Regular" size="20.0" />
                </font>
             </Label>
-            <Button fx:id="showExpensesBoardBtn" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="168.0" layoutY="14.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="170.0" stylesheets="@../../Styles.css" text="Show board" textFill="TRANSPARENT" />
-            <Button fx:id="changeUserBtn" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="481.0" layoutY="32.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="104.0" style="-fx-font-size: 10;" stylesheets="@../../Styles.css" text="Change user" textFill="TRANSPARENT" />
+            <Button fx:id="showExpensesBoardBtn" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="168.0" layoutY="14.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="170.0" stylesheets="@../Styles.css" text="Show board" textFill="TRANSPARENT" />
+            <Button fx:id="changeUserBtn" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="481.0" layoutY="32.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="104.0" style="-fx-font-size: 10;" stylesheets="@../Styles.css" text="Change user" textFill="TRANSPARENT" />
          </children>
       </AnchorPane>
       <TabPane fx:id="tabPane" layoutY="518.0" prefHeight="346.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
